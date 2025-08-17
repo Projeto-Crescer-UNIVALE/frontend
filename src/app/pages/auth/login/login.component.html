@@ -1,6 +1,5 @@
 <div class="auth-center">
   <div class="auth-card">
-    <img class="logo" src="/assets/logo-projeto-crescer.svg" alt="Projeto Crescer">
     <h2>Acesso</h2>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
@@ -12,8 +11,8 @@
 
       <label class="label" for="password" style="margin-top:10px">Senha</label>
       <input class="input" id="password" type="password" placeholder="************" formControlName="password">
-      <div class="help"><a routerLink="/forgot-password">Esqueceu sua senha?</a></div>
-      <button class="btn" type="submit" [disabled]="loading">ENTRAR</button>
+      <div class="help" style="margin-top: 5px;"><a routerLink="/forgot-password">Esqueceu sua senha?</a></div>
+      <button class="btn" type="submit" [disabled]="loading" style="margin-top: 10px;">ENTRAR</button>
     </form>
   </div>
 </div>
