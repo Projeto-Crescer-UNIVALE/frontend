@@ -1,18 +1,50 @@
 <div class="auth-center">
+  <!-- LOGO OUTSIDE CARD -->
+  <img src="assets/images/logo.svg" alt="Projeto Crescer" class="logo">
+
   <div class="auth-card">
     <h2>Acesso</h2>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
       <label class="label" for="email">E-mail</label>
-      <input class="input" id="email" type="email" placeholder="meu@email.com.br" formControlName="email">
-      <div class="error" *ngIf="f.email.touched && f.email.invalid">
-        Informe um e-mail válido.
+      <input
+        class="input"
+        id="email"
+        type="email"
+        placeholder="meu@email.com.br"
+        formControlName="email"
+        [ngClass]="{'invalid-input': f.email.invalid && (f.email.dirty || f.email.touched)}"
+      />
+      <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="error-msg">
+        <div *ngIf="f.email.errors?.['required']">E-mail é obrigatório.</div>
+        <div *ngIf="f.email.errors?.['email']">Por favor, insira um e-mail válido.</div>
       </div>
 
       <label class="label" for="password" style="margin-top:10px">Senha</label>
-      <input class="input" id="password" type="password" placeholder="************" formControlName="password">
-      <div class="help" style="margin-top: 5px;"><a routerLink="/forgot-password">Esqueceu sua senha?</a></div>
-      <button class="btn" type="submit" [disabled]="loading" style="margin-top: 10px;">ENTRAR</button>
+      <input
+        class="input"
+        id="password"
+        type="password"
+        placeholder="************"
+        formControlName="password"
+        [ngClass]="{'invalid-input': f.password.invalid && (f.password.dirty || f.password.touched)}"
+      />
+      <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)" class="error-msg">
+        <div *ngIf="f.password.errors?.['required']">Senha é obrigatória.</div>
+        <div *ngIf="f.password.errors?.['minlength']">
+          A senha deve ter no mínimo 6 caracteres.
+        </div>
+      </div>
+
+      <div class="help"><a routerLink="/forgot-password">Esqueceu sua senha?</a></div>
+      <button
+        class="btn"
+        type="submit"
+        [disabled]="form.invalid || loading"
+        style="margin-top: 10px;"
+      >
+        ENTRAR
+      </button>
     </form>
   </div>
 </div>

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
+  standalone: true,
   selector: 'app-forgot-password-sent',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './forgot-password-sent.component.html',
-  styleUrl: './forgot-password-sent.component.css'
+  styleUrls: ['./forgot-password-sent.component.css']
 })
-export class ForgotPasswordSentComponent {
-
-}
+export class ForgotPasswordSentComponent {}

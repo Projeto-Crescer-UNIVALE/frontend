@@ -1,35 +1,171 @@
-:root { --pc-blue:#1e4d6f; --pc-blue-2:#2b6a93; --pc-card:#ffffff; }
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0; font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: radial-gradient(1200px 800px at 60% 10%, var(--pc-blue-2), var(--pc-blue));
+:root {
+  --pc-blue: #1e4d6f;
+  --pc-blue-2: #2b6a93;
+  --pc-card: #ffffff;
 }
-.auth-center{
-  min-height:100dvh; display:grid; place-items:center; padding:24px;
+
+* {
+  box-sizing: border-box;
 }
-.auth-card{
-  width:100%; max-width:520px; background:var(--pc-card); border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,.15); padding:24px 20px;
+
+html, body {
+  height: 100%;
 }
-h1,h2,h3{margin:0 0 16px}
-.label{font-size:.85rem;color:#333;margin:6px 0}
-.input{
-  width:100%; padding:12px 14px; border-radius:8px; border:1px solid #d6d6d6; outline:none;
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: radial-gradient(1000px 700px at 55% 5%, var(--pc-blue-2), var(--pc-blue));
 }
-.input:focus{border-color:#6aa6d8; box-shadow:0 0 0 3px rgba(106,166,216,.2)}
-.btn{
-  width:100%; padding:12px 16px; border-radius:8px; border:0; cursor:pointer;
-  background:#2f6fa0; color:#fff; font-weight:600;
+
+/* Center stack: logo + card */
+.auth-center {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 6px;
+  transform: translateY(-60px); /* Moves entire content block up */
 }
-.btn:disabled{opacity:.6; cursor:not-allowed}
-.help{font-size:.85rem; text-align:right}
-.help a{color:#2f6fa0; text-decoration:none}
-.error{color:#c62828; font-size:.85rem; margin-top:6px}
-.logo{display:block; margin:10px auto 18px; height:46px}
-.subtle{color:#4a4a4a; font-size:.9rem}
-.center-box{
-  background:var(--pc-card); border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.15);
-  padding:28px 24px; width:min(520px, calc(100% - 32px));
-  text-align:center;
+
+/* Login card */
+.auth-card {
+  width: 100%;
+  max-width: 460px; /* Slightly wider */
+  background: var(--pc-card);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  padding: 32px 28px; /* Increased padding for more spacious layout */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 22px; /* Adds spacing between children */
+}
+
+/* Title - "Acesso" */
+.auth-card h1,
+.auth-card h2,
+.auth-card h3 {
+  margin: 0 0 22px;
+  font-size: 1.5rem; /* Larger title */
+  font-weight: 700;
+  color: #222;
+}
+
+/* Labels */
+.label {
+  font-size: 0.95rem;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 8px; /* Bigger padding for taller inputs */
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
+  background: #fff;
+  transition: all 0.2s ease;
+  margin-bottom: 10px; /* More vertical spacing between inputs */
+}
+
+.input:focus {
+  border-color: #6aa6d8;
+  box-shadow: 0 0 0 2px rgba(106, 166, 216, 0.25);
+}
+
+/* Login button */
+.btn {
+  width: 100%;
+  padding: 14px; /* Taller button */
+  margin-top: 8px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #2f6fa0;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #255c85;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Help links */
+.help {
+  font-size: 0.9rem;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.help a {
+  color: #2f6fa0;
+  text-decoration: none;
+}
+
+.help a:hover {
+  text-decoration: underline;
+}
+
+/* Error message */
+.error {
+  color: #c62828;
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+/* Logo */
+.logo {
+  display: block;
+  margin: 0 auto 6px;
+  height: 64px;
+}
+
+img.logo {
+  max-width: 20%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Centered alternative content */
+.center-box {
+  background: var(--pc-card);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  padding: 22px 22px;
+  width: min(440px, calc(100% - 32px));
+  text-align: center;
+}
+
+/* Error message styling */
+.error-msg {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Invalid input field styling */
+.invalid-input {
+  border-color: red;
+  background-color: #fdd;
+}
+
+/* Optional: For better spacing between fields */
+.input {
+  margin-bottom: 10px;
 }

@@ -8,12 +8,11 @@ import { RouterLink } from '@angular/router';
   selector: 'app-login',
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   loading = false;
 
-  // ✅ Strictly typed FormGroup
   form!: FormGroup<{
     email: FormControl<string | null>;
     password: FormControl<string | null>;
@@ -38,15 +37,13 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    // Mock login (replace with API later)
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
-      alert('Login OK (mock)');
+      alert('Login validado!');
     }, 600);
   }
 
-  // ✅ Typed getter, so you can use f.email / f.password in the template
   get f() {
     return this.form.controls;
   }
