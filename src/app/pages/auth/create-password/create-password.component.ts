@@ -1,49 +1,65 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
+function matchValidator(a: string, b: string): ValidatorFn {
+  return (group: AbstractControl) => {
+    const one = group.get(a)?.value;
+    const two = group.get(b)?.value;
+    return one && two && one === two ? null : { mismatch: true };
+  };
+}
 
 @Component({
   standalone: true,
   selector: 'app-create-password',
-  imports: [RouterLink, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './create-password.component.html',
-  styleUrls: ['./create-password.component.css']
+  styleUrls: ['./create-password.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreatePasswordComponent {
-  password: string = '';
-  confirmPassword: string = '';
-  passwordTouched: boolean = false;
-  confirmTouched: boolean = false;
+  private http = inject(HttpClient);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
-  constructor(private router: Router) {}
+  readonly loading = signal(false);
+  private token = this.route.snapshot.paramMap.get('token')!;
 
-  get isPasswordValid(): boolean {
-    return this.password.length >= 6;
-  }
+  readonly form = new FormGroup({
+    password: new FormControl<string | null>(null, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(6)],
+    }),
+    confirm: new FormControl<string | null>(null, {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+  }, { validators: matchValidator('password', 'confirm') });
 
-  get passwordErrorMsg(): string {
-    if (!this.password) return 'Senha é obrigatória.';
-    if (this.password.length < 6) return 'A senha deve ter no mínimo 6 caracteres.';
-    return '';
-  }
+  get f() { return this.form.controls; }
 
-  get isConfirmPasswordValid(): boolean {
-    return this.password === this.confirmPassword;
-  }
-
-  get formValid(): boolean {
-    return this.isPasswordValid && this.isConfirmPasswordValid;
-  }
-
-  onSubmit(event: Event) {
-    event.preventDefault();
-    this.passwordTouched = true;
-    this.confirmTouched = true;
-
-    if (this.formValid) {
-      alert('Senha criada com sucesso!');
-      this.router.navigate(['/login']);
+  onSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
     }
+
+    this.loading.set(true);
+
+    // TODO: replace with your AuthService "create password" endpoint using the token
+    // this.auth.createPassword(this.token, this.form.value.password!)
+    //   .subscribe({
+    //     next: () => this.router.navigate(['/auth/login']),
+    //     error: () => this.loading.set(false),
+    //     complete: () => this.loading.set(false)
+    //   });
+
+    setTimeout(() => {
+      this.loading.set(false);
+      this.router.navigate(['/auth/login']);
+    }, 500);
   }
 }

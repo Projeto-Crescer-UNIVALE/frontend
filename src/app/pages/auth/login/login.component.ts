@@ -1,35 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { RouterLink, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   standalone: true,
   selector: 'app-login',
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginComponent implements OnInit {
-  loading = false;
+export class LoginComponent {
+  private http = inject(HttpClient);
+  private router = inject(Router);
+  readonly loading = signal(false);
 
-  form!: FormGroup<{
-    email: FormControl<string | null>;
-    password: FormControl<string | null>;
-  }>;
+  readonly form = new FormGroup({
+    email: new FormControl<string | null>(null, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    }),
+    password: new FormControl<string | null>(null, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(6)],
+    }),
+  });
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      email: this.fb.control<string | null>('', {
-        validators: [Validators.required, Validators.email],
-      }),
-      password: this.fb.control<string | null>('', {
-        validators: [Validators.required, Validators.minLength(6)],
-      }),
-    });
-  }
+  get f() { return this.form.controls; }
 
   submit() {
     if (this.form.invalid) {
@@ -37,14 +36,22 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-      alert('Login validado!');
-    }, 600);
-  }
+    this.loading.set(true);
 
-  get f() {
-    return this.form.controls;
+    // TODO: replace with your AuthService login call
+    // Example:
+    // this.auth.login(this.form.value as { email: string; password: string })
+    //   .subscribe({
+    //     next: () => this.router.navigateByUrl('/'),
+    //     error: (err) => { /* show toast/error */ this.loading.set(false); },
+    //     complete: () => this.loading.set(false)
+    //   });
+
+    // Temporary mock so you can see the flow:
+    setTimeout(() => {
+      this.loading.set(false);
+      this.router.navigateByUrl('/'); // or dashboard
+    }, 500);
   }
 }
+

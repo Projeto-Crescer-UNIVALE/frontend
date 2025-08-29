@@ -1,38 +1,51 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   standalone: true,
   selector: 'app-forgot-password',
-  imports: [RouterLink, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForgotPasswordComponent {
-  email: string = '';
-  emailTouched: boolean = false;
+  private http = inject(HttpClient);
+  readonly loading = signal(false);
+  isSent = false;
 
-  constructor(private router: Router) {}
+  readonly form = new FormGroup({
+    email: new FormControl<string | null>(null, {
+      nonNullable: true,
+      validators: [Validators.required, Validators.email],
+    })
+  });
 
-  get isEmailValid(): boolean {
-    return this.emailErrorMsg === '';
-  }
+  get f() { return this.form.controls; }
 
-  get emailErrorMsg(): string {
-    if (!this.email) return 'E-mail é obrigatório.';
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(this.email)) return 'E-mail inválido.';
-    return '';
-  }
-
-  onSubmit(event: Event) {
-    event.preventDefault();
-    this.emailTouched = true;
-
-    if (this.isEmailValid) {
-      this.router.navigate(['/forgot-password/sent']);
+  onSubmit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
     }
+
+    this.loading.set(true);
+
+    // TODO: replace with your AuthService forgot-password call.
+    // Example:
+    // this.auth.requestPasswordReset(this.form.value.email!)
+    //   .subscribe({
+    //     next: () => { this.isSent = true; this.loading.set(false); },
+    //     error: () => { this.loading.set(false); /* show error */ }
+    //   });
+
+    // Temporary mock:
+    setTimeout(() => {
+      this.isSent = true;   // only after "success"
+      this.loading.set(false);
+    }, 500);
   }
 }
