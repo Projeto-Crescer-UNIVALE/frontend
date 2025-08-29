@@ -1,0 +1,88 @@
+.topbar {
+  background-color: #0073b1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+.nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 500px;
+}
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.user-icon img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+table {
+  width: 80%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+th, td {
+  border: 1px solid #e5e7eb; /* cinza claro */
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+th {
+  background: #f3f4f6;
+  font-weight: 600;
+}
+
+.sem-dados {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  user-select: none;
+}
+
+.btn-primario {
+   background-color: #0073b1;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.btn-primario:hover { filter: brightness(1.08); }
+
+.btn-perigo {
+   background-color: #d9534f;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-perigo:hover { filter: brightness(1.08); }
