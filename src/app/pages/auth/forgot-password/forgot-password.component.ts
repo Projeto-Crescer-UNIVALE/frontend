@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../core/sevices/auth.service';
 
 @Component({
   standalone: true,
@@ -13,39 +13,24 @@ import { HttpClient } from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ForgotPasswordComponent {
-  private http = inject(HttpClient);
+  private auth = inject(AuthService);
   readonly loading = signal(false);
   isSent = false;
 
   readonly form = new FormGroup({
-    email: new FormControl<string | null>(null, {
-      nonNullable: true,
-      validators: [Validators.required, Validators.email],
-    })
+    email: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] })
   });
 
   get f() { return this.form.controls; }
 
   onSubmit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
+    if (this.form.invalid) { this.form.markAllAsTouched(); return; }
     this.loading.set(true);
 
-    // TODO: replace with your AuthService forgot-password call.
-    // Example:
-    // this.auth.requestPasswordReset(this.form.value.email!)
-    //   .subscribe({
-    //     next: () => { this.isSent = true; this.loading.set(false); },
-    //     error: () => { this.loading.set(false); /* show error */ }
-    //   });
-
-    // Temporary mock:
-    setTimeout(() => {
-      this.isSent = true;   // only after "success"
-      this.loading.set(false);
-    }, 500);
+    this.auth.requestPasswordReset(this.form.value.email!)
+      .subscribe({
+        next: () => { this.isSent = true; this.loading.set(false); },
+        error: () => { this.loading.set(false); }
+      });
   }
 }
