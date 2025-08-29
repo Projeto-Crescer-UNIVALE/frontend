@@ -1,30 +1,3 @@
-.topbar {
-  background-color: #0073b1;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-}
-.logo {
-  font-weight: bold;
-  font-size: 18px;
-}
-.nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: 500px;
-}
-.nav a:hover {
-  text-decoration: underline;
-}
-
-.user-icon img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-}
 
 table {
   width: 80%;
