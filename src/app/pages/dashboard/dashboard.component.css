@@ -1,0 +1,168 @@
+.navbar {
+  background: #0D7ABC;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 50px;
+  font-family: "Poppins", sans-serif;
+
+}
+
+/* Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0;
+}
+
+.nav-links a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.nav-links li.active a {
+  background: rgba(0,0,0,0.2); 
+  border-left: 3px solid #063c5f;
+}
+
+.nav-links a:hover {
+  background: rgba(0,0,0,0.15);
+}
+
+/* Usuário canto direito */
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.nav-user .material-symbols-outlined {
+  font-size: 28px;
+}
+.nav-user .arrow {
+  font-size: 20px;
+}
+
+/* Container geral */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #f2f2f2;
+  font-family: Arial, sans-serif;
+  
+  
+}
+
+.topbar {
+  background: #ffffff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+
+}
+
+.perfil {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.nome {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+ 
+}
+
+.cargo {
+  font-size: 14px;
+  color: #0D7ABC; 
+  margin: 0;
+}
+
+
+/* Conteúdo principal */
+.content {
+  padding: 50px;
+}
+
+.section-title {
+  color: #0D7ABC;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 15px;
+}
+
+.material-symbols-outlined {
+  font-size: 70px;
+  color: #0D7ABC; 
+  font-weight: 500;
+  
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 500,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.card-icon {
+  font-size: 40px;
+  color: #007bff;
+}
+
+.card-number {
+  font-size: 20px;
+  font-weight: bold;
+  color: #575D65;
+}
+
+.card-label {
+  font-size: 14px;
+  color: #575D65;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
