@@ -1,0 +1,116 @@
+:host {
+  width: 100%;
+}
+
+.app-header {
+  background-color: #1e63b9;
+  color: white;
+  padding: 0 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px; 
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 35px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo-text strong {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.logo-text span {
+  font-size: 0.7rem;
+}
+
+.header-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  height: 100%;
+}
+
+.header-nav li a {
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  height: 60px;
+  transition: background-color 0.2s ease-in-out;
+  border-bottom: 3px solid transparent;
+}
+
+.header-nav li a:hover {
+  background-color: #1a549d;
+}
+
+.header-nav li a.active {
+  background-color: #164582; 
+}
+
+.header-user {
+  position: relative;
+}
+
+.avatar-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  border-radius: 50%;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  z-index: 1000;
+  width: 160px;
+}
+
+.logout-button {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  text-align: left;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.logout-button:hover {
+  background-color: #f0f0f0;
+}
