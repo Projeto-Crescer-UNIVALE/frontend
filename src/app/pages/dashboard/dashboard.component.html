@@ -1,1 +1,72 @@
-<p>dashboard works!</p>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300&display=swap" />
+
+<!-- Navbar -->
+<nav class="navbar">
+  <ul class="nav-links">
+    <li class="active"><a href="#">Painel</a></li>
+    <li><a href="#">Alunos</a></li>
+    <li><a href="#">Usuários</a></li>
+    <li><a href="#">Oficinas</a></li>
+  </ul>
+
+  <div class="nav-user">
+    <span class="material-symbols-outlined">account_circle</span>
+    <span class="material-symbols-outlined arrow">arrow_drop_down</span>
+  </div>
+</nav>
+
+<div class="dashboard-container">
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="perfil">
+      <span class="material-symbols-outlined" style="color: #575D65; font-weight: 500;">account_circle</span>
+      <div class="info">
+        <p class="nome">Nome completo do usuário</p>
+        <p class="cargo">Administrador</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <main class="content">
+    <h2 class="section-title">Visão geral</h2>
+
+    <div class="cards-grid">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">school</span>
+        </div>
+        <div class="card-content">
+          <div class="card-number">78</div>
+          <div class="card-label">Alunos ativos</div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">newsstand</span>
+        </div>
+        <div class="card-info">
+          <div class="card-number">4</div>
+          <div class="card-label">Oficinas ativas</div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">group</span>
+        </div>
+        <div class="card-info">
+          <div class="card-number">3</div>
+          <div class="card-label">Usuários ativos</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
