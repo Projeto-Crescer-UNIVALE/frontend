@@ -21,4 +21,4 @@ export const routes: Routes = [
   // Redirecionamento padrão
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: '**', redirectTo: 'dashboard' }
-];
+]

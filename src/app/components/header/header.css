@@ -1,116 +1,137 @@
 :host {
   width: 100%;
+  font-family: "Poppins", sans-serif;
 }
 
 .app-header {
-  background-color: #1e63b9;
-  color: white;
-  padding: 0 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: #0D7ABC;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 50px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  color: #fff;
 }
 
+/* Conteúdo do header */
 .header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px; 
+  width: 100%;
 }
 
+/* Logo */
 .header-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .logo-img {
-  height: 35px;
+  height: 30px;
 }
 
 .logo-text {
   display: flex;
   flex-direction: column;
   line-height: 1.1;
+  color: #fff;
 }
 
 .logo-text strong {
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .logo-text span {
   font-size: 0.7rem;
+  opacity: 0.9;
 }
 
+/* Navegação */
 .header-nav ul {
-  margin: 0;
-  padding: 0;
   list-style: none;
   display: flex;
-  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav li {
+  margin: 0;
 }
 
 .header-nav li a {
-  display: flex;
-  align-items: center;
-  padding: 0 1.5rem;
+  display: block;
+  padding: 15px 20px;
   text-decoration: none;
-  color: #ffffff;
+  font-size: 14px;
   font-weight: 500;
-  height: 60px;
-  transition: background-color 0.2s ease-in-out;
-  border-bottom: 3px solid transparent;
+  color: #fff;
+  transition: background 0.2s ease-in-out;
+
 }
 
 .header-nav li a:hover {
-  background-color: #1a549d;
+  background: rgba(0,0,0,0.15);
 }
 
 .header-nav li a.active {
-  background-color: #164582; 
+  background: rgba(0,0,0,0.2);
+  border-left: 3px solid #063c5f;
 }
 
+/* Usuário (avatar + dropdown) */
 .header-user {
   position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 5px;
+  color: #fff;
 }
 
 .avatar-button {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
   border-radius: 50%;
   display: flex;
   align-items: center;
+  padding: 0;
 }
 
 .user-avatar {
   border-radius: 50%;
+  height: 32px;
+  width: 32px;
 }
 
 .user-dropdown {
   position: absolute;
-  top: 50px;
+  top: 55px;
   right: 0;
-  background-color: white;
-  border-radius: 8px;
+  background: #fff;
+  border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   z-index: 1000;
   width: 160px;
 }
 
 .logout-button {
-  background-color: transparent;
+  background: transparent;
   border: none;
   color: #333;
-  padding: 0.75rem 1rem;
+  padding: 10px 15px;
   width: 100%;
   text-align: left;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .logout-button:hover {
-  background-color: #f0f0f0;
+  background: #f5f5f5;
 }
