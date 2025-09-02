@@ -13,14 +13,25 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   color: #fff;
 }
-
-/* Conteúdo do header */
 .header-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
 }
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.header-user {
+  margin-left: auto; 
+  display: flex;
+  align-items: center;
+}
+
 
 /* Logo */
 .header-logo {
@@ -82,7 +93,7 @@
   border-left: 3px solid #063c5f;
 }
 
-/* Usuário (avatar + dropdown) */
+
 .header-user {
   position: relative;
   display: flex;

@@ -14,4 +14,4 @@ import { HeaderComponent } from './components/header/header';
 })
 export class AppComponent {
   title = 'repositorio-front';
-};
+}

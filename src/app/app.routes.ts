@@ -4,6 +4,7 @@ import { AlunosComponent } from './pages/alunos/alunos.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { OficinasComponent } from './pages/oficinas/oficinas.component';
 
+
 export const routes: Routes = [
   // Tela inicial (dashboard)
   {
