@@ -1,0 +1,20 @@
+:host, .auth-layout {
+  display: block;
+  min-height: 100vh;
+}
+
+.auth-layout {
+  /* gradient background lives HERE */
+  background: radial-gradient(1000px 700px at 55% 5%, var(--pc-blue-2), var(--pc-blue));
+}
+
+.auth-center {
+  min-height: 100vh;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 24px;
+}
