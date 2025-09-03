@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.component';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'auth/login' },
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
 
   {
     path: 'auth',
