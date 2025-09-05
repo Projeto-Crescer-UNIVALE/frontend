@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.component';
 import { PainelComponent } from './pages/painel/painel.component';
-import { AlunosComponent } from './pages/alunos/alunos.component';
-import { UsuariosComponent } from './pages/usuarios/usuarios.component';
-import { OficinasComponent } from './pages/oficinas/oficinas.component';
 
 
 export const routes: Routes = [
@@ -40,9 +37,6 @@ export const routes: Routes = [
       import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
   },
   { path: 'painel', component: PainelComponent },
-  { path: 'alunos', component: AlunosComponent },
-  { path: 'usuarios', component: UsuariosComponent },
-  { path: 'oficinas', component: OficinasComponent },
-
+  
   { path: '**', redirectTo: 'auth/login' }
 ];
