@@ -1,0 +1,51 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300&display=swap" />
+
+
+<div class="container-oficina">
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    <a href="#">Oficinas</a>
+    <span>&gt;</span>
+    <span class="current">Adicionar nova oficina</span>
+  </nav>
+
+  <h1>Adicionar nova oficina</h1>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <h2>Informações básicas</h2>
+
+    <div class="form-grid">
+      <div>
+        <label for="nome">Nome da oficina</label>
+        <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome" />
+      </div>
+
+      <div class="form-group">
+        <label for="professor">Professor</label>
+        <select id="professor" formControlName="professor">
+          <option value="">Selecione uma opção</option>
+          <option *ngFor="let prof of professores" [value]="prof.id">{{ prof.nome }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="dias-semana">
+      <label>Dias da semana</label>
+      <div *ngFor="let dia of dias" class="checkbox-group">
+        <label>
+          <input type="checkbox" [value]="dia" formControlName="dias" /> {{ dia }}
+        </label>
+        <div class="horarios">
+          <input type="time" formControlName="horaInicio" placeholder="Início" />
+          <span>até</span>
+          <input type="time" formControlName="horaFim" placeholder="Fim" />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-salvar">Adicionar nova oficina</button>
+  </form>
+</div>

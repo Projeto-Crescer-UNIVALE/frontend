@@ -1,0 +1,64 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300&display=swap" />
+
+<div class="container-oficina">
+  <div class="breadcrumb">
+    <a routerLink="/oficinas">Oficinas</a>
+    <span>&gt;</span>
+    <span class="current">{{ titulo }}</span>
+  </div>
+
+
+  <h1>{{ titulo }}</h1>
+
+  <h2>Informações básicas</h2>
+
+  <div class="form-grid">
+    <div>
+      <label for="nome">Nome da oficina</label>
+      <input id="nome" type="text" [(ngModel)]="oficina.nome" />
+    </div>
+
+    <div>
+      <label for="prof">Professor</label>
+      <select id="prof" [(ngModel)]="oficina.professor">
+        <option value="">Selecione uma opção</option>
+        <option>João da Silva</option>
+        <option>Maria Souza</option>
+      </select>
+    </div>
+  </div>
+
+ 
+  <h2>Dias da semana</h2>
+  <div class="dias-semana">
+    <div class="checkbox-group">
+      <label>
+        <input type="checkbox" [(ngModel)]="dias[0].checked" />
+        {{ dias[0].nome }}
+      </label>
+
+      <div class="horarios" *ngIf="dias[0].checked">
+        <div>
+          <label>Hora de início</label>
+          <input type="time" [(ngModel)]="dias[0].inicio" />
+        </div>
+        <div>
+          <label>Hora de fim</label>
+          <input type="time" [(ngModel)]="dias[0].fim" />
+        </div>
+      </div>
+    </div>
+
+    <div class="checkbox-group" *ngFor="let d of dias.slice(1)">
+      <label [class.desabilitado]="d.bloqueado">
+        <input type="checkbox" [disabled]="d.bloqueado" />
+        {{ d.nome }}
+      </label>
+    </div>
+  </div>
+
+  <button class="btn-salvar" (click)="salvar()">Salvar alterações</button>
+</div>
