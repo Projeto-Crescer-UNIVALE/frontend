@@ -4,7 +4,6 @@ import { PainelComponent } from './pages/painel/painel.component';
 
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'auth/login' },
   {
     path: 'auth',
     component: AuthLayoutComponent,
