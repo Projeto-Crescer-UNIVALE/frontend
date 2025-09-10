@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -9,24 +9,25 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     RouterModule
   ],
-  // CORREÇÃO AQUI:
-  templateUrl: './header.html',
-  // E AQUI TAMBÉM (garantindo que o nome do css está correto):
-  styleUrl: './header.css'
-})
-export class HeaderComponent {
-  // Propriedade para controlar a visibilidade do dropdown
-  dropdownOpen = false;
-  userName = "Usuário Logado";
 
-  // Método para alternar a visibilidade do dropdown
+  templateUrl: './header.html',
+  styleUrls: ['./header.css']
+})
+
+export class HeaderComponent {
+  @Input() userName: string = "Usuário Logado";
+  @Output() logoutClick = new EventEmitter<void>();
+
+  dropdownOpen = false;
+  
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  // Método para o logout
+
   logout(): void {
     console.log("Usuário encerrou a sessão.");
     this.dropdownOpen = false;
+    this.logoutClick.emit(); 
   }
 }
