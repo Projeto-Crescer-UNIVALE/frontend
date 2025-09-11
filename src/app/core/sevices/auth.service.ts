@@ -8,10 +8,27 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/auth';
   public user: Funcionario | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const savedUser = localStorage.getItem('user');
+    if (savedUser) {
+      this.user = JSON.parse(savedUser);
+    }
+  }
 
   login(email: string, senha: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { email, senha });
+  }
+
+  setUser(user: Funcionario, token: string) {
+    this.user = user;
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
+  }
+
+  logout() {
+    this.user = null;
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
   }
 
   requestPasswordReset(email: string): Observable<void> {
@@ -29,5 +46,20 @@ export class AuthService {
       { novaSenha, confirmarNovaSenha },
       { headers }
     );
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  getUser(): Funcionario | null {
+    if (this.user) return this.user;
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser): null;
+  }
+
+  isAdmin(): boolean {
+    const user = this.getUser();
+    return user?.perfil === 'Administrador';
   }
 }
