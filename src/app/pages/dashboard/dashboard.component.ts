@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { take } from 'rxjs/operators';
+
+interface DashboardInterface {  
+ alunosAtivos: number,  
+ oficinasAtivas: number,  
+ usuariosAtivos: number,  
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -7,10 +14,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
-  alunosAtivos: number = 0;
-  oficinasAtivas: number = 0;
-  usuariosAtivos: number = 0;
+  readonly dados = signal({
+    alunosAtivos: 0,  
+    oficinasAtivas: 0,  
+    usuariosAtivos: 0, 
+  })
 
   constructor(private http: HttpClient) {}
 
@@ -19,12 +27,15 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarDashboard() {
-    this.http.get<any>('http://localhost:3000/dashboard')
+    this.http.get<DashboardInterface>('http://localhost:3000/dashboard')
+      .pipe(take(1))
       .subscribe({
         next: (res) => {
-          this.alunosAtivos = res.alunos;
-          this.oficinasAtivas = res.oficinas;
-          this.usuariosAtivos = res.usuarios;
+          this.dados.set({
+            alunosAtivos: res.alunosAtivos,  
+            oficinasAtivas: res.oficinasAtivas,  
+            usuariosAtivos: res.usuariosAtivos, 
+          })
         },
         error: (err) => console.error('Erro ao carregar dados do dashboard', err)
       });

@@ -1,9 +1,3 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300&display=swap" />
-
-
 <div class="dashboard-container">
   <!-- Topbar -->
   <header class="topbar">
@@ -27,7 +21,7 @@
           <span class="material-symbols-outlined">school</span>
         </div>
         <div class="card-content">
-          <div class="card-number">{{ alunosAtivos }}</div>
+          <div class="card-number">{{ dados().alunosAtivos }}</div>
           <div class="card-label">Alunos ativos</div>
         </div>
       </div>
@@ -38,7 +32,7 @@
           <span class="material-symbols-outlined">newsstand</span>
         </div>
         <div class="card-info">
-          <div class="card-number">{{ oficinasAtivas }}</div>
+          <div class="card-number">{{ dados().oficinasAtivas }}</div>
           <div class="card-label">Oficinas ativas</div>
         </div>
       </div>
@@ -49,7 +43,7 @@
           <span class="material-symbols-outlined">group</span>
         </div>
         <div class="card-info">
-          <div class="card-number">{{ usuariosAtivos }}</div>
+          <div class="card-number">{{ dados().usuariosAtivos }}</div>
           <div class="card-label">Usuários ativos</div>
         </div>
       </div>
