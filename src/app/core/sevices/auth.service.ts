@@ -14,6 +14,11 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { email, senha });
   }
 
+  setUser(user: Funcionario, token: string) {
+    this.user = user;
+    localStorage.setItem('accessToken', token);
+  }
+
   requestPasswordReset(email: string): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/recuperar-senha`, { email });
   }
@@ -29,5 +34,13 @@ export class AuthService {
       { novaSenha, confirmarNovaSenha },
       { headers }
     );
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.user && !!localStorage.getItem('accessToken');
+  }
+
+  isAdmin(): boolean {
+    return this.user?.perfil === 'Administrador';
   }
 }
