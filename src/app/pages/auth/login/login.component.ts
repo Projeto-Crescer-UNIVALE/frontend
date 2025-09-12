@@ -34,7 +34,7 @@ export class LoginComponent {
           if (response.accessToken) {
             this.authService.user = response.funcionario;
             localStorage.setItem('accessToken', response.accessToken);
-            this.router.navigate(['/']);
+            this.router.navigate(['dashboard']);
           }
         },
         error: (err) => { console.error('Erro no login:', err); }
