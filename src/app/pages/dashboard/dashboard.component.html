@@ -1,0 +1,52 @@
+<div class="dashboard-container">
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="perfil">
+      <span class="material-symbols-outlined" style="color: #575D65; font-weight: 500;">account_circle</span>
+      <div class="info">
+        <p class="nome">Nome completo do usuário</p>
+        <p class="cargo">Administrador</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <main class="content">
+    <h2 class="section-title">Visão geral</h2>
+
+    <div class="cards-grid">
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">school</span>
+        </div>
+        <div class="card-content">
+          <div class="card-number">{{ dados().alunosAtivos }}</div>
+          <div class="card-label">Alunos ativos</div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">newsstand</span>
+        </div>
+        <div class="card-info">
+          <div class="card-number">{{ dados().oficinasAtivas }}</div>
+          <div class="card-label">Oficinas ativas</div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">group</span>
+        </div>
+        <div class="card-info">
+          <div class="card-number">{{ dados().usuariosAtivos }}</div>
+          <div class="card-label">Usuários ativos</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

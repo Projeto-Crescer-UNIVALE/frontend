@@ -1,0 +1,148 @@
+:host {
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+}
+
+.app-header {
+  background: #0D7ABC;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  height: 50px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  color: #fff;
+}
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.header-user {
+  margin-left: auto; 
+  display: flex;
+  align-items: center;
+}
+
+
+/* Logo */
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-img {
+  height: 30px;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.logo-text strong {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.logo-text span {
+  font-size: 0.7rem;
+  opacity: 0.9;
+}
+
+/* Navegação */
+.header-nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav li {
+  margin: 0;
+}
+
+.header-nav li a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  transition: background 0.2s ease-in-out;
+
+}
+
+.header-nav li a:hover {
+  background: rgba(0,0,0,0.15);
+}
+
+.header-nav li a.active {
+  background: rgba(0,0,0,0.2);
+  border-left: 3px solid #063c5f;
+}
+
+
+.header-user {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 5px;
+  color: #fff;
+}
+
+.avatar-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.user-avatar {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 0;
+  z-index: 1000;
+  width: 160px;
+}
+
+.logout-button {
+  background: transparent;
+  border: none;
+  color: #333;
+  padding: 10px 15px;
+  width: 100%;
+  text-align: left;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logout-button:hover {
+  background: #f5f5f5;
+}
