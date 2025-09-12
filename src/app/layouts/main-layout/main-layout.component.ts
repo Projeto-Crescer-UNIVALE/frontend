@@ -1,22 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { HeaderComponent } from '../../components/header/header';
+import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from '../../components/header/header'; // ajuste o caminho se necessário
 
 @Component({
-  standalone: true,
   selector: 'app-main-layout',
-  imports: [RouterModule, HeaderComponent],
+  standalone: true,
+  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './main-layout.component.html',
   styleUrls: ['./main-layout.component.css']
 })
-export class MainLayoutComponent {
-  userName = 'Usuário';
-  dropdownOpen = false;
-
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
-  logout() {
-    console.log('logout');
-  }
-}
+export class MainLayoutComponent {}

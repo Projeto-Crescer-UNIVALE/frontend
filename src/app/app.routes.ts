@@ -22,10 +22,14 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'dashboard', loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent) },
-      
-    ]
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
+      },
+     
+    ],
   },
 
-  { path: '**', redirectTo: 'auth/login' }
+  { path: '**', redirectTo: 'auth/login' },
 ];
