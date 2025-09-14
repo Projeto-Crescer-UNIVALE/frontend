@@ -1,35 +1,175 @@
-/* Estilo comum para todas as telas */
 .container-oficina {
-  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  padding: 30px 60px;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
   color: #333;
 }
 
-/* Tela de adicionar nova oficina */
-.container-oficina.novo {
-  padding: 30px 60px;
+/* breadcrumb */
+.container-oficina .breadcrumb {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.container-oficina .breadcrumb a {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 500;
+}
+.container-oficina .breadcrumb span { color: #999; }
+.container-oficina .breadcrumb .current {
+  color: #333;
+  font-weight: 500;
+}
+
+
+.container-oficina h1 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 120%;
+  margin-bottom: 32px;
+  color: #0D7ABC;
+}
+.container-oficina h2 {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #1A1A1A;
+}
+
+
+.container-oficina label {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+  color: #4D4D4D;
+}
+
+
+.form-grid-duplo {
+  display: grid;
+  grid-template-columns: 1fr 390px; 
+  gap: 24px 40px;
+  margin-bottom: 32px;
+}
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+.select-professor {
+  width: 100%;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .form-grid-duplo {
+    grid-template-columns: 1fr;
+  }
+}
+
+input[type="text"],
+input[type="time"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #CFCFCF;
+  border-radius: 6px;
+  outline: none;
   background-color: #fff;
+  box-sizing: border-box;
+}
+input[type="text"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #0D7ABC;
+  box-shadow: 0 0 0 2px rgba(13, 122, 188, 0.2);
 }
 
-.container-oficina.novo h1 {
-  color: #0D7ABC; /* título */
+
+.form-note.erro {
+  font-size: 12px;
+  color: #d93025;
+  margin-top: 4px;
 }
 
-.container-oficina.novo .btn-salvar {
+
+.dias-semana {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+.dia {
+  margin-bottom: 10px;
+}
+.dia label {
+  font-weight: 400;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+}
+
+
+.horarios {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: 25px;
+  margin-top: 6px;
+}
+.horarios input {
+  width: 120px;
+  min-width: 100px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #CFCFCF;
+  height: 40px;
+}
+
+
+.btn-salvar {
   background-color: #2971A5;
   color: #fff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 30px;
+  transition: background 0.15s ease-in-out, transform 0.05s;
 }
-
-/* Tela de editar oficina */
-.container-oficina.editar {
-  padding: 30px 60px;
-  background-color: #f9f9f9;
-}
-
-.container-oficina.editar h1 {
-  color: #0D7ABC; /* título */
-}
-
-.container-oficina.editar .btn-salvar {
+.btn-salvar:hover {
   background-color: #245f8a;
-  color: #fff;
+}
+.btn-salvar:active {
+  transform: translateY(1px);
+}
+.btn-cancelar {
+  background-color: #E0E0E0;
+  color: #333;
+  border: none;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-left: 15px;
+  transition: background 0.15s ease-in-out, transform 0.05s;
+}
+.btn-cancelar:hover {
+  background-color: #c7c7c7;
+}
+.btn-cancelar:active {
+  transform: translateY(1px);
 }

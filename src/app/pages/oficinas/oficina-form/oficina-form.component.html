@@ -1,7 +1,16 @@
-<div class="container-oficina" [ngClass]="id ? 'editar' : 'novo'">
+ <div class="container-oficina">
+   <nav class="breadcrumb">
+    <a href="#">Oficinas</a>
+    <span>&gt;</span>
+    <span class="current">{{ titulo}}</span>
+  </nav>
+  <h1>{{ titulo }}</h1>
+
+  <h2>Informações básicas</h2>
+
   <form [formGroup]="form" (ngSubmit)="salvar()">
-    <div class="form-grid">
-      <div>
+     <div class="form-grid-duplo">
+      <div class="campo">
         <label for="nome">Nome da oficina</label>
         <input id="nome" type="text" formControlName="nome" />
         <div class="form-note erro" *ngIf="form.get('nome')?.touched && form.get('nome')?.invalid">
@@ -9,9 +18,9 @@
         </div>
       </div>
 
-      <div>
+      <div class="campo">
         <label for="professor">Professor</label>
-        <select id="professor" formControlName="professor">
+        <select id="professor" formControlName="professor" class="select-professor">
           <option value="">Selecione uma opção</option>
           <option>João da Silva</option>
           <option>Maria Souza</option>
@@ -22,9 +31,41 @@
       </div>
     </div>
 
-    <!-- demais campos -->
+   <div class="dias-semana">
+  <div class="dia" *ngFor="let dia of dias">
+    <input
+      type="checkbox"
+      [id]="dia.key"
+      [(ngModel)]="dia.checked"
+      [ngModelOptions]="{standalone: true}"
+      [disabled]="!!dia.bloqueado"
+      name="chk-{{dia.key}}" />
+    <label [for]="dia.key">{{ dia.nome }}</label>
 
-    <button class="btn-salvar" type="submit">{{ titulo }}</button>
+    <div class="horarios" *ngIf="dia.checked && !dia.bloqueado">
+      <div>
+        <label>Hora de início</label><br>
+        <input
+          type="time"
+          [(ngModel)]="dia.inicio"
+          [ngModelOptions]="{standalone: true}"
+          name="inicio-{{dia.key}}" />
+      </div>
+      <div>
+        <label>Hora de fim</label><br>
+        <input
+          type="time"
+          [(ngModel)]="dia.fim"
+          [ngModelOptions]="{standalone: true}"
+          name="fim-{{dia.key}}" />
+      </div>
+    </div>
+  </div>
+</div>
+
+    <button class="btn-salvar" type="submit">
+      {{ id ? 'Salvar alterações' : 'Adicionar nova oficina' }}
+    </button>
     <button class="btn-cancelar" type="button" (click)="cancelar()">Cancelar</button>
   </form>
 </div>

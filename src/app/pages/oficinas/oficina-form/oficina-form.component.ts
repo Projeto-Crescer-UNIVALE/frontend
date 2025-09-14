@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule , FormGroup, FormControl, Validators } from '@angular/forms';
 
 type Dia = {
   nome: string;
@@ -16,7 +16,7 @@ type Dia = {
   selector: 'app-oficina-form',
   standalone: true,
 
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
   templateUrl: './oficina-form.component.html',
   styleUrls: ['./oficina-form.component.css']
 })
