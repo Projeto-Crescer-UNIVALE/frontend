@@ -15,7 +15,7 @@ type Dia = {
 @Component({
   selector: 'app-oficina-form',
   standalone: true,
-  // ✅ Troca FormsModule → ReactiveFormsModule
+
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './oficina-form.component.html',
   styleUrls: ['./oficina-form.component.css']
@@ -24,7 +24,7 @@ export class OficinaFormComponent {
   id: string | null;
   titulo: string;
 
-  // ✅ Formulário reativo com validação obrigatória
+
   readonly form = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     professor: new FormControl('', [Validators.required])
@@ -44,7 +44,7 @@ export class OficinaFormComponent {
     this.id = this.route.snapshot.paramMap.get('id');
     this.titulo = this.id ? 'Editar oficina' : 'Adicionar nova oficina';
 
-    // Se edição, carrega dados no form
+  
     if (this.id) {
       this.form.patchValue({
         nome: 'Oficina de Música',
@@ -61,7 +61,7 @@ export class OficinaFormComponent {
 
     const oficina = {
       ...this.form.value,
-      dias: this.dias // se quiser incluir no objeto final
+      dias: this.dias 
     };
 
     if (this.id) {
@@ -70,7 +70,7 @@ export class OficinaFormComponent {
       console.log('Criando nova oficina:', oficina);
     }
 
-    this.router.navigate(['/oficinas']); // volta para listagem
+    this.router.navigate(['/oficinas']); 
   }
 
   cancelar() {

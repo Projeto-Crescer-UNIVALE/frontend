@@ -1,28 +1,30 @@
-<form [formGroup]="form" (ngSubmit)="salvar()">
-  <div class="form-grid">
-    <div>
-      <label for="nome">Nome da oficina</label>
-      <input id="nome" type="text" formControlName="nome" />
-      <div class="erro" *ngIf="form.get('nome')?.touched && form.get('nome')?.invalid">
-        O nome da oficina é obrigatório.
+<div class="container-oficina" [ngClass]="id ? 'editar' : 'novo'">
+  <form [formGroup]="form" (ngSubmit)="salvar()">
+    <div class="form-grid">
+      <div>
+        <label for="nome">Nome da oficina</label>
+        <input id="nome" type="text" formControlName="nome" />
+        <div class="form-note erro" *ngIf="form.get('nome')?.touched && form.get('nome')?.invalid">
+          O nome da oficina é obrigatório.
+        </div>
+      </div>
+
+      <div>
+        <label for="professor">Professor</label>
+        <select id="professor" formControlName="professor">
+          <option value="">Selecione uma opção</option>
+          <option>João da Silva</option>
+          <option>Maria Souza</option>
+        </select>
+        <div class="form-note erro" *ngIf="form.get('professor')?.touched && form.get('professor')?.invalid">
+          Selecione um professor.
+        </div>
       </div>
     </div>
 
-    <div>
-      <label for="prof">Professor</label>
-      <select id="prof" formControlName="professor">
-        <option value="">Selecione uma opção</option>
-        <option>João da Silva</option>
-        <option>Maria Souza</option>
-      </select>
-      <div class="erro" *ngIf="form.get('professor')?.touched && form.get('professor')?.invalid">
-        Selecione um professor.
-      </div>
-    </div>
-  </div>
+    <!-- demais campos -->
 
-  <!-- Dias da semana podem continuar com [(ngModel)] -->
-  ...
-  <button class="btn-salvar" type="submit">{{ titulo }}</button>
-  <button class="btn-cancelar" type="button" (click)="cancelar()">Cancelar</button>
-</form>
+    <button class="btn-salvar" type="submit">{{ titulo }}</button>
+    <button class="btn-cancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>

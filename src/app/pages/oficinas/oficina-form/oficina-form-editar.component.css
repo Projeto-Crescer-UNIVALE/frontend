@@ -1,0 +1,186 @@
+/* Container principal */
+.container-oficina {
+  padding: 30px 60px;
+  background-color: #fff;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+  color: #333;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.breadcrumb a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+.breadcrumb span { color: #999; }
+.breadcrumb .current { color: #333; font-weight: 500; }
+
+/* Título principal */
+.container-oficina h1 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 120%;
+  margin-bottom: 32px;
+  color: #0D7ABC;
+}
+
+/* Subtítulos */
+.container-oficina h2 {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #1A1A1A;
+}
+
+.container-oficina label {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 6px;
+  display: block;
+  color: #4D4D4D;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px; /* nome ocupa a maior parte, professor menor */
+  gap: 24px 40px;
+  margin-bottom: 32px;
+  align-items: start;
+}
+
+/* Quando tela menor, usa coluna única */
+@media (max-width: 900px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Inputs e selects */
+input[type="text"],
+input[type="time"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #CFCFCF;
+  border-radius: 6px;
+  outline: none;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="time"]:focus,
+select:focus,
+textarea:focus {
+  border-color: #0D7ABC;
+  box-shadow: 0 0 0 2px rgba(13, 122, 188, 0.12);
+}
+
+input[type="time"] {
+  height: 36px;
+  padding: 6px 10px;
+}
+
+.dias-semana {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.dias-semana .dia-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Checkbox + label */
+.dias-semana label {
+  font-weight: 400;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.horarios {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 28px; /* alinhamento ao checkbox */
+  margin-top: 6px;
+}
+
+.horarios input {
+  width: 120px;
+  min-width: 100px;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border: 1px solid #CFCFCF;
+  height: 34px;
+}
+
+/* Botão de ação */
+.btn-salvar {
+  background-color: #2971A5;
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 30px;
+  transition: background 0.15s ease-in-out, transform 0.05s;
+}
+.btn-salvar:hover { background-color: #245f8a; }
+.btn-salvar:active { transform: translateY(1px); }
+
+.desabilitado {
+  color: #9b9b9b !important;
+  opacity: 0.9;
+}
+.checkbox-group input[disabled] {
+  accent-color: #bfbfbf; 
+}
+
+
+.form-note {
+  font-size: 13px;
+  color: #666;
+  margin-top: 8px;
+}
+
+/* Responsividade: otimiza horários em telas pequenas */
+@media (max-width: 520px) {
+  .horarios {
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 0;
+  }
+  .horarios input {
+    width: 100%;
+  }
+  .container-oficina {
+    padding: 20px;
+  }
+}

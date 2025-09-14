@@ -16,32 +16,7 @@ export const routes: Routes = [
       { path: 'reset-password/:token', loadComponent: () => import('./pages/auth/reset-password/reset-password.component').then(m => m.ResetPasswordComponent) },
     ]
   },
-  {
-    path: 'oficinas',
-    loadComponent: () =>
-      import('./pages/oficinas/oficinas-list/oficinas-list.component')
-        .then(m => m.OficinasListComponent),
-  },
-  {
-    path: 'oficinas/novo',
-    loadComponent: () =>
-      import('./pages/oficinas/oficina-form/oficina-form.component')
-        .then(m => m.OficinaFormComponent),
-  },
-  {
-    path: 'oficinas/editar/:id',
-    loadComponent: () =>
-      import('./pages/oficinas/oficina-form/oficina-form.component')
-        .then(m => m.OficinaFormComponent),
-  },
-
-  {
-  path: 'oficinas/cadastro',
-    loadComponent: () =>
-      import('./pages/oficinas/cadastro-oficina/cadastro-oficina.component')
-        .then(m => m.CadastroOficinaComponent),
-  },
-
+  
  
   {
     path: '',
@@ -55,33 +30,12 @@ export const routes: Routes = [
       {
         path: 'oficinas',
         children: [
-          {
-            path: '',
-            loadComponent: () =>
-              import('./pages/oficinas/oficinas-list/oficinas-list.component')
-                .then(m => m.OficinasListComponent) // listagem
-          },
-          {
-            path: 'novo',
-            loadComponent: () =>
-              import('./pages/oficinas/oficina-form/oficina-form.component')
-                .then(m => m.OficinaFormComponent) // criação
-          },
-          {
-            path: 'editar/:id',
-            loadComponent: () =>
-              import('./pages/oficinas/oficina-form/oficina-form.component')
-                .then(m => m.OficinaFormComponent) // edição
-          },
-          {
-            path: 'cadastro',
-            loadComponent: () =>
-              import('./pages/oficinas/cadastro-oficina/cadastro-oficina.component')
-                .then(m => m.CadastroOficinaComponent)
-          }
+          { path: '', loadComponent: () => import('./pages/oficinas/oficinas-list/oficinas-list.component').then(m => m.OficinasListComponent) },
+          { path: 'novo', loadComponent: () => import('./pages/oficinas/oficina-form/oficina-form.component').then(m => m.OficinaFormComponent) },
+          { path: 'editar/:id', loadComponent: () => import('./pages/oficinas/oficina-form/oficina-form.component').then(m => m.OficinaFormComponent) },
         ]
-      }
-    ],
+      },
+    ]
   },
 
   { path: '**', redirectTo: 'auth/login' },
