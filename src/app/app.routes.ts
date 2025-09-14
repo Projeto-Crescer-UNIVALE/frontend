@@ -3,9 +3,8 @@ import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.compon
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard'},
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
 
- 
   {
     path: 'auth',
     component: AuthLayoutComponent,
@@ -17,7 +16,6 @@ export const routes: Routes = [
     ]
   },
 
- 
   {
     path: '',
     component: MainLayoutComponent,
@@ -27,7 +25,15 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
       },
-     
+
+      {
+        path: 'usuarios',
+        children: [
+          { path: '', loadComponent: () => import('./pages/usuarios/list/list.component').then(m => m.ListComponent) },
+          { path: 'novo', loadComponent: () => import('./pages/usuarios/form/form.component').then(m => m.FormComponent) },
+          { path: 'editar/:id', loadComponent: () => import('./pages/usuarios/form/form.component').then(m => m.FormComponent) },
+        ]
+      }
     ],
   },
 
