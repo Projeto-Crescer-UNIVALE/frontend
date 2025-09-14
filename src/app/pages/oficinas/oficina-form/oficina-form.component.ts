@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 
 type Dia = {
   nome: string;
@@ -15,7 +15,8 @@ type Dia = {
 @Component({
   selector: 'app-oficina-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  // ✅ Troca FormsModule → ReactiveFormsModule
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './oficina-form.component.html',
   styleUrls: ['./oficina-form.component.css']
 })
@@ -23,10 +24,11 @@ export class OficinaFormComponent {
   id: string | null;
   titulo: string;
 
-  oficina = {
-    nome: '',
-    professor: ''
-  };
+  // ✅ Formulário reativo com validação obrigatória
+  readonly form = new FormGroup({
+    nome: new FormControl('', [Validators.required]),
+    professor: new FormControl('', [Validators.required])
+  });
 
   dias: Dia[] = [
     { nome: 'Domingo', key: 'dom', checked: true, inicio: '00:00', fim: '00:00' },
@@ -42,22 +44,36 @@ export class OficinaFormComponent {
     this.id = this.route.snapshot.paramMap.get('id');
     this.titulo = this.id ? 'Editar oficina' : 'Adicionar nova oficina';
 
+    // Se edição, carrega dados no form
     if (this.id) {
-      this.oficina = { nome: 'Oficina de Música', professor: '' };
+      this.form.patchValue({
+        nome: 'Oficina de Música',
+        professor: 'João da Silva'
+      });
     }
   }
 
   salvar() {
-    if (this.id) {
-      console.log('Atualizando oficina:', this.oficina);
-    } else {
-      console.log('Criando nova oficina:', this.oficina);
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
     }
 
-    this.router.navigate(['/dashboard/oficinas']);
+    const oficina = {
+      ...this.form.value,
+      dias: this.dias // se quiser incluir no objeto final
+    };
+
+    if (this.id) {
+      console.log('Atualizando oficina:', oficina);
+    } else {
+      console.log('Criando nova oficina:', oficina);
+    }
+
+    this.router.navigate(['/oficinas']); // volta para listagem
   }
 
   cancelar() {
-    this.router.navigate(['/dashboard/oficinas']);
+    this.router.navigate(['/oficinas']);
   }
 }

@@ -52,7 +52,35 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent),
       },
-     
+      {
+        path: 'oficinas',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./pages/oficinas/oficinas-list/oficinas-list.component')
+                .then(m => m.OficinasListComponent) // listagem
+          },
+          {
+            path: 'novo',
+            loadComponent: () =>
+              import('./pages/oficinas/oficina-form/oficina-form.component')
+                .then(m => m.OficinaFormComponent) // criação
+          },
+          {
+            path: 'editar/:id',
+            loadComponent: () =>
+              import('./pages/oficinas/oficina-form/oficina-form.component')
+                .then(m => m.OficinaFormComponent) // edição
+          },
+          {
+            path: 'cadastro',
+            loadComponent: () =>
+              import('./pages/oficinas/cadastro-oficina/cadastro-oficina.component')
+                .then(m => m.CadastroOficinaComponent)
+          }
+        ]
+      }
     ],
   },
 

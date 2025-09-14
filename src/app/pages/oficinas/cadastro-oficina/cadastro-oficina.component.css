@@ -1,4 +1,4 @@
-/* Container principal */
+
 .container-oficina {
   padding: 30px 60px;
   background-color: #fff;
@@ -6,7 +6,7 @@
   color: #333;
 }
 
-/* Título principal */
+
 .container-oficina h1 {
   font-weight: 600;
   font-size: 28px;
@@ -15,7 +15,7 @@
   color: #0D7ABC;
 }
 
-/* Subtítulos*/
+
 .container-oficina h2 {
   font-weight: 600;
   font-size: 18px;
@@ -23,7 +23,7 @@
   color: #1A1A1A;
 }
 
-/* Labels */
+
 .container-oficina label {
   font-weight: 500;
   font-size: 14px;
@@ -32,7 +32,7 @@
   color: #4D4D4D;
 }
 
-/* Layout do formulário */
+
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -40,7 +40,7 @@
   margin-bottom: 32px;
 }
 
-/* Inputs e selects */
+
 input[type="text"],
 input[type="time"],
 select {
@@ -61,7 +61,7 @@ select:focus {
   box-shadow: 0 0 0 2px rgba(13, 122, 188, 0.2);
 }
 
-/* Dias da semana */
+
 .dias-semana {
   display: flex;
   flex-direction: column;
@@ -78,7 +78,7 @@ select:focus {
   color: #333;
 }
 
-/* Checkbox + horários */
+
 .checkbox-group {
   display: flex;
   flex-direction: column;
@@ -89,14 +89,14 @@ select:focus {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-left: 28px; /* alinhamento ao checkbox */
+  margin-left: 28px; 
 }
 
 .horarios input {
   width: 120px;
 }
 
-/* Botão de ação */
+
 .btn-salvar {
   background-color: #2971A5;
   color: #fff;
