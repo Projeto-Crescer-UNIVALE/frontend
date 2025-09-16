@@ -1,4 +1,5 @@
-import { Component, input, output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 
 export interface Coluna {
   campo: string;   // chave no objeto de dados (ex.: 'nome', 'cpf', 'email')
@@ -12,16 +13,25 @@ export interface Coluna {
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css'],
 })
-export class TabelaComponent {
-  // INPUT SIGNALS
+
+export class TabelaComponent implements OnInit {
+  private http = inject(HttpClient);
+
+  endpoint = input.required<string>();
   colunas = input<Coluna[]>([]);
-  dados   = input<any[]>([]);
   textoVisualizar = input<string>('Visualizar');
   textoDeletar    = input<string>('Deletar');
 
-  // OUTPUT SIGNALS
+  dados = signal<any[]>([]); // SIGNAL para dados
+
   acaoPrimaria  = output<any>(); // visualizar
   acaoSecundaria = output<any>(); // deletar
+
+  ngOnInit() {
+    this.http.get<any[]>(this.endpoint()).subscribe(response => {
+      this.dados.set(response);
+    });
+  }
 
   onVisualizar(linha: any) {
     this.acaoPrimaria.emit(linha);
