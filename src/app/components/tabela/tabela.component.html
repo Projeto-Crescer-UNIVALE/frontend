@@ -1,42 +1,54 @@
+<div class="search-card">
+  <div class="search-row">
+    <div class="search-input-wrap">
+      <input
+        type="text"
+        placeholder="Pesquisar..."
+        [value]="termoPesquisa()"
+        (keyup)="onPesquisar($event)"
+        class="input-pesquisa"
+      />
+    </div>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <ng-container >
-        @for (coluna of colunas(); track coluna.campo) {
-        <th [style.width]="coluna.width ?? null">{{ coluna.nome }}</th>
-      }
-    </ng-container>
-      <th class="acoes">Ações</th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    @if (!dados() || dados().length === 0) {
+<div class="table-wap">
+  <table class="table">
+    <thead>
+      <tr>
+        <ng-container>
+          @for (coluna of colunas(); track coluna.campo) {
+          <th [style.width]="coluna.width ?? null">{{ coluna.nome }}</th>
+          }
+        </ng-container>
+        <th class="acoes">Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @if (!dados() || dados().length === 0) {
       <tr>
         <td [attr.colspan]="colunas().length + 1" class="sem-dados">
           Sem dados
         </td>
       </tr>
-    }
-     @else {
-      @for (linha of dados(); track linha.id ?? $index) {
-        <tr>
-          <ng-container>
+      } @else { @for (linha of dados(); track linha.id ?? $index) {
+      <tr>
+        <ng-container>
           @for (coluna of colunas(); track coluna.campo) {
-            <td>{{ linha[coluna.campo] }}</td>
+          <td>{{ linha[coluna.campo] }}</td>
           }
         </ng-container>
-          <td class="acoes">
-            <button class="btn btn-primario" (click)="onVisualizar(linha)">
-              Visualizar
-            </button>
-            <button class="btn btn-perigo" (click)="onDeletar(linha)">
-              Deletar
-            </button>
-          </td>
-        </tr>
-      }
-    }
-  </tbody>
-</table>
+        <td class="acoes">
+          <button class="btn btn-primario" (click)="onVisualizar(linha)">
+            {{ textoVisualizar() }}
+          </button>
+          <button class="btn btn-perigo" (click)="onDeletar(linha)">
+            {{ textoDeletar() }}
+          </button>
+        </td>
+      </tr>
+      } }
+    </tbody>
+  </table>
+</div>
