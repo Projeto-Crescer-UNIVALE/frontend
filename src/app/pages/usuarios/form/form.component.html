@@ -8,6 +8,7 @@
   <h1>{{ titulo }}</h1>
 
   <h2>Informações básicas</h2>
+  {{form.value | json}}
 
   <form [formGroup]="form" (ngSubmit)="salvar()">
     <div class="form-grid-duplo">
@@ -18,33 +19,33 @@
 
       <div class="campo">
         <label for="telefone">Telefone</label>
-        <input id="telefone" type="text" formControlName="telefone" />
+        <input id="telefone" type="tel" formControlName="telefone" mask="(00) 00000-0000"/>
       </div>
     </div>
 
     <div class="form-grid-duplo">
       <div class="campo">
         <label for="email">E-mail</label>
-        <input id="email" type="text" formControlName="email" />
+        <input id="email" type="email" formControlName="email" />
       </div>
     </div>
 
     <div class="form-grid-duplo">
       <div class="campo">
-        <label>Tipo de usuário</label>
-        <label><input type="radio" formControlName="tipo" value="Administrador" /> Administrador</label>
-        <label><input type="radio" formControlName="tipo" value="Professor" /> Professor</label>
+        <label>Tipo de usuário
+        <input type="radio" formControlName="id_perfil" value="1" /> Administrador
+        <input type="radio" formControlName="id_perfil" value="2" /> Professor</label>
       </div>
 
       <div class="campo">
-        <label>Status</label>
-        <label><input type="radio" formControlName="status" value="Ativo" /> Ativo</label>
-        <label><input type="radio" formControlName="status" value="Inativo" /> Inativo</label>
+        <label>Status
+        <input type="checkbox" formControlName="ativo" /> Ativo</label>
       </div>
     </div>
 
-    <button class="btn-salvar" type="submit">
-      {{ id ? 'Salvar alterações' : 'Adicionar novo usuário' }}
+    <button class="btn-salvar" type="submit" [disabled]="form.invalid">
+      <!-- {{ id ? 'Salvar alterações' : 'Adicionar novo usuário' }} -->
+        Adicionar novo usuário
     </button>
     <button class="btn-cancelar" type="button" (click)="cancelar()">Cancelar</button>
   </form>
