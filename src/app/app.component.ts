@@ -10,7 +10,7 @@ import { RouterOutlet } from '@angular/router';
 
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'] // ✅ corrigido (plural)
 })
 export class AppComponent {
   title = 'repositorio-front';
