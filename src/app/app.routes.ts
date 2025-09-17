@@ -30,8 +30,7 @@ export const routes: Routes = [
         path: 'usuarios',
         children: [
           { path: '', loadComponent: () => import('./pages/usuarios/list/list.component').then(m => m.ListComponent) },
-          { path: 'novo', loadComponent: () => import('./pages/usuarios/form/form.component').then(m => m.FormComponent) },
-          { path: 'editar/:id', loadComponent: () => import('./pages/usuarios/form/form.component').then(m => m.FormComponent) },
+          { path: ':id', loadComponent: () => import('./pages/usuarios/form/form.component').then(m => m.FormComponent) },
         ]
       }
     ],

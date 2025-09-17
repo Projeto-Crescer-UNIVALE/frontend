@@ -39,7 +39,7 @@
           <td>{{ u.tipo }}</td>
           <td>{{ u.email }}</td>
           <td class="actions">
-            <a class="btn btn-view" [routerLink]="['/usuarios/editar', u.id]">Visualizar</a>
+            <a class="btn btn-view" [routerLink]="['/usuarios', u.id]">Visualizar</a>
             <button class="btn btn-danger" (click)="deletar(u.id)">Deletar</button>
           </td>
         </tr>
