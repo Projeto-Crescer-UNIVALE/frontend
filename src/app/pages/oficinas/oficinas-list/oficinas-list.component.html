@@ -34,7 +34,7 @@
           <td>{{ o.dias }}</td>
           <td>{{ o.horario }}</td>
           <td class="actions">
-            <a class="btn btn-view" [routerLink]="['/oficinas/editar', o.id]">Editar</a>
+            <a class="btn btn-view" [routerLink]="['/oficinas', o.id]">Editar</a>
             <button class="btn btn-danger" (click)="deletar(o.id)">Excluir</button>
           </td>
         </tr>

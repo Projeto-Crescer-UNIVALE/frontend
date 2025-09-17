@@ -1,5 +1,5 @@
- <div class="container-oficina">
-   <nav class="breadcrumb">
+<div class="container-oficina">
+  <nav class="breadcrumb">
     <a href="#">Oficinas</a>
     <span>&gt;</span>
     <span class="current">{{ titulo}}</span>
@@ -9,21 +9,21 @@
   <h2>Informações básicas</h2>
 
   <form [formGroup]="form" (ngSubmit)="salvar()">
-     <div class="form-grid-duplo">
+    <div class="form-grid-duplo">
       <div class="campo">
         <label for="nome">Nome da oficina</label>
         <input id="nome" type="text" formControlName="nome" />
         <div class="form-note erro" *ngIf="form.get('nome')?.touched && form.get('nome')?.invalid">
-          O nome da oficina é obrigatório.
+          O nome da oficina está invalido.
         </div>
       </div>
 
       <div class="campo">
         <label for="professor">Professor</label>
-        <select id="professor" formControlName="professor" class="select-professor">
+        <select id="professor" formControlName="id_funcionario" class="select-professor">
           <option value="">Selecione uma opção</option>
-          <option>João da Silva</option>
-          <option>Maria Souza</option>
+          <option value="1">João da Silva</option>
+          <option value="2">Maria Souza</option>
         </select>
         <div class="form-note erro" *ngIf="form.get('professor')?.touched && form.get('professor')?.invalid">
           Selecione um professor.
@@ -31,37 +31,31 @@
       </div>
     </div>
 
-   <div class="dias-semana">
-  <div class="dia" *ngFor="let dia of dias">
-    <input
-      type="checkbox"
-      [id]="dia.key"
-      [(ngModel)]="dia.checked"
-      [ngModelOptions]="{standalone: true}"
-      [disabled]="!!dia.bloqueado"
-      name="chk-{{dia.key}}" />
-    <label [for]="dia.key">{{ dia.nome }}</label>
+    <div class="dias-semana" formArrayName="cronograma">
+      @for (dia of dias; track $index) {
 
-    <div class="horarios" *ngIf="dia.checked && !dia.bloqueado">
-      <div>
-        <label>Hora de início</label><br>
-        <input
-          type="time"
-          [(ngModel)]="dia.inicio"
-          [ngModelOptions]="{standalone: true}"
-          name="inicio-{{dia.key}}" />
+      <div class="dia">
+        <input type="checkbox" [id]="$index +1" name="chk-{{$index +1}}"
+          (change)="handleToggleCronograma($index+1,$event)" />
+        <label [for]="$index +1">{{ dia.nome }}</label>
+
+        @let exist = cronogramaDiaExists($index+1);
+        @if (exist) {
+
+        <div class="horarios" [formGroupName]="$index">
+          <div>
+            <label>Hora de início</label><br>
+            <input type="time" formControlName="hora_inicio" name="inicio-{{$index +1}}" />
+          </div>
+          <div>
+            <label>Hora de fim</label><br>
+            <input type="time" formControlName="hora_fim" name="fim-{{$index +1}}" />
+          </div>
+        </div>
+        }
       </div>
-      <div>
-        <label>Hora de fim</label><br>
-        <input
-          type="time"
-          [(ngModel)]="dia.fim"
-          [ngModelOptions]="{standalone: true}"
-          name="fim-{{dia.key}}" />
-      </div>
+      }
     </div>
-  </div>
-</div>
 
     <button class="btn-salvar" type="submit">
       {{ id ? 'Salvar alterações' : 'Adicionar nova oficina' }}
