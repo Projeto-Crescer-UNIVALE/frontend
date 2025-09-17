@@ -1,0 +1,33 @@
+<div class="alunos-container">
+  <h1>Lista de Alunos</h1>
+
+  <div class="actions-top">
+    <button class="btn btn-primary" (click)="novoAluno()">+ Novo Aluno</button>
+  </div>
+
+  <div class="table-card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Grupo</th>
+          <th>Oficinas</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aluno of alunos">
+          <td>{{ aluno.nome }}</td>
+          <td>{{ aluno.cpf }}</td>
+          <td>{{ aluno.grupo }}</td>
+          <td>{{ aluno.oficinas }}</td>
+          <td class="actions">
+            <button class="btn btn-view" (click)="editarAluno(aluno.id)">Editar</button>
+            <button class="btn btn-danger" (click)="deletarAluno(aluno.id)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

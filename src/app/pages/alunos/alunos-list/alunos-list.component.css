@@ -1,0 +1,88 @@
+.alunos-container {
+  padding: 32px;
+  background-color: #eef1f5; /* mais escuro que a listagem */
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 26px;
+  color: #0D7ABC;
+  margin-bottom: 20px;
+}
+
+.actions-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.table-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.table tbody td {
+  padding: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Botões */
+.btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #0D7ABC;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #095c8d;
+}
+
+.btn-view {
+  background: #0D7ABC;
+  color: #fff;
+}
+
+.btn-view:hover {
+  background: #095c8d;
+}
+
+.btn-danger {
+  background: #f8f8f8;
+  color: #444;
+  border: 1px solid #ddd;
+}
+
+.btn-danger:hover {
+  background: #f0f0f0;
+}

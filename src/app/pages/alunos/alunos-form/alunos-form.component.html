@@ -1,0 +1,126 @@
+<div class="form-container">
+  <h1>{{ id ? 'Editar Aluno' : 'Novo Aluno' }}</h1>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()">
+    <!-- Linha dupla -->
+    <div class="form-grid-duplo">
+      <div class="campo">
+        <label>Nome do aluno</label>
+        <input formControlName="nome" type="text" />
+      </div>
+      <div class="campo">
+        <label>CPF</label>
+        <input formControlName="cpf" type="text" mask="999.999.999-99"/>
+      </div>
+    </div>
+
+    <div class="form-grid-duplo">
+      <div class="campo">
+        <label>RG</label>
+        <input formControlName="rg" type="text" mask="9999999-9"/>
+      </div>
+      <div class="campo">
+        <label>Data de Nascimento</label>
+        <input formControlName="data_nascimento" type="date" />
+      </div>
+    </div>
+
+    <div class="form-grid-duplo">
+      <div class="campo">
+        <label>NIS</label>
+        <input formControlName="nis" type="text" mask="99999999999"/>
+      </div>
+      <div class="campo">
+        <label>CEP</label>
+        <input formControlName="cep" type="text" mask="99999-999"/>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label>Rua</label>
+      <input formControlName="rua" type="text" />
+    </div>
+
+    <div class="form-grid-duplo">
+      <div class="campo">
+        <label>Bairro</label>
+        <input formControlName="bairro" type="text" />
+      </div>
+      <div class="campo">
+        <label>Número</label>
+        <input formControlName="numero_casa" type="text" />
+      </div>
+    </div>
+
+    <div class="form-grid-duplo">
+      <div class="campo">
+        <label>Responsável</label>
+        <input formControlName="nome_mae" type="text" />
+      </div>
+      <div class="campo">
+        <label>Telefone</label>
+        <input formControlName="telefone" type="text" mask="(00) 00000-0000"/>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label>Grupo</label>
+      <select formControlName="grupo_scfv">
+        <option value="">Selecione</option>
+        <option value="0">Criança</option>
+        <option value="1">Adolescente</option>
+        <option value="2">Adulto</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Oficinas</label>
+      <select>
+        <option value="">Selecione</option>
+        <option value="0">Criança</option>
+        <option value="1">Adolescente</option>
+        <option value="2">Adulto</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Situação Escolar</label>
+      <select>
+        <option value="">Selecione</option>
+        <option value="0">Frequente</option>
+        <option value="1">Não Frequente</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label>Programas Sociais</label>
+      <select>
+        <option value="">Selecione</option>
+        <option value="0">Programa Bolsa Familia</option>
+        <option value="1">BPC/LOAS</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="alergias">Alergias</label>
+      <textarea formControlName="alergias">
+      </textarea>
+    </div>
+
+     <div class="campo">
+      <label for="necessidades_especiais">Necessidades Especiais</label>
+      <textarea formControlName="necessidades_especiais">
+      </textarea>
+    </div>
+
+     <div class="campo">
+      <label for="medicamentos">Medicamentos</label>
+      <textarea formControlName="medicamentos">
+      </textarea>
+    </div>
+
+    <div class="botoes">
+      <button type="submit" class="btn btn-primary">{{ id ? 'Salvar Alterações' : 'Criar Aluno' }}</button>
+    </div>
+  </form>
+</div>
