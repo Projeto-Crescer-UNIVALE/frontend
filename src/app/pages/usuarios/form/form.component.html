@@ -1,0 +1,51 @@
+<div class="container-usuario">
+  <nav class="breadcrumb">
+    <a href="#">Usuários</a>
+    <span>&gt;</span>
+    <span class="current">{{ titulo }}</span>
+  </nav>
+
+  <h1>{{ titulo }}</h1>
+
+  <h2>Informações básicas</h2>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()">
+    <div class="form-grid-duplo">
+      <div class="campo">
+        <label for="nome">Nome completo</label>
+        <input id="nome" type="text" formControlName="nome" />
+      </div>
+
+      <div class="campo">
+        <label for="telefone">Telefone</label>
+        <input id="telefone" type="tel" formControlName="telefone" mask="(00) 00000-0000"/>
+      </div>
+    </div>
+
+    <div class="form-grid-duplo">
+      <div class="campo">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" formControlName="email" />
+      </div>
+    </div>
+
+    <div class="form-grid-duplo">
+      <div class="campo">
+        <label>Tipo de usuário
+        <input type="radio" formControlName="id_perfil" value="1" /> Administrador
+        <input type="radio" formControlName="id_perfil" value="2" /> Professor</label>
+      </div>
+
+      <div class="campo">
+        <label>Status
+        <input type="checkbox" formControlName="ativo" /> Ativo</label>
+      </div>
+    </div>
+
+    <button class="btn-salvar" type="submit" [disabled]="form.invalid">
+      <!-- {{ id ? 'Salvar alterações' : 'Adicionar novo usuário' }} -->
+        Adicionar novo usuário
+    </button>
+    <button class="btn-cancelar" type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+</div>
