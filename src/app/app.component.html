@@ -1,11 +1,1 @@
-<app-tabela
-  [colunas]="[
-    { campo: 'nome',  nome: 'Nome' },
-    { campo: 'cpf',   nome: 'CPF' },
-    { campo: 'email', nome: 'Email', width: '220px' }
-  ]"
-  endpoint="/api/usuarios"
-  (acaoPrimaria)="visualizar($event)"
-  (acaoSecundaria)="deletar($event)"
-></app-tabela>
-
+<router-outlet></router-outlet>
