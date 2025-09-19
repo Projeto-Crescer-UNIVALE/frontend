@@ -1,71 +1,137 @@
-.alunos-container {
-  padding: 32px;
-  background-color: #eef1f5; /* mais escuro que a listagem */
-  min-height: 100vh;
+/* Container principal */
+.container-oficina {
+  padding: 32px 64px;
+  background-color: #f5f6f8; /* cinza bem claro do fundo */
   font-family: "Poppins", sans-serif;
   color: #333;
+  min-height: 100vh;
 }
 
-h1 {
+/* Título da página */
+.container-oficina h1 {
   font-weight: 600;
-  font-size: 26px;
+  font-size: 24px;
+  margin-bottom: 20px;
   color: #0D7ABC;
-  margin-bottom: 20px;
 }
 
-.actions-top {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
-}
-
-.table-card {
+/* Card de busca */
+.search-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Input de pesquisa */
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0 10px;
+}
+
+.search-input-wrap input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  padding: 8px;
+  font-family: "Poppins", sans-serif;
+}
+
+.search-icon {
+  font-size: 20px;
+  color: #777;
+  margin-right: 6px;
+}
+
+/* Botão principal */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #0D7ABC;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #095c8d;
+}
+
+.btn-new {
+  margin-bottom: 15px;
+}
+
+/* Tabela */
+.table-wrap {
   overflow-x: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
+  background: #fff;
 }
 
-.table thead th {
+.table thead {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
   text-align: left;
-  padding: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
   font-weight: 600;
-  border-bottom: 1px solid #e5e5e5;
+  color: #444;
 }
 
-.table tbody td {
-  padding: 12px;
-  border-top: 1px solid #f0f0f0;
+.table td {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #444;
+  border-top: 1px solid #eee;
 }
 
+/* Zebra */
+.table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Ações */
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 6px;
 }
 
-/* Botões */
 .btn {
-  padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
+  text-decoration: none;
+  text-align: center;
   border: none;
-}
-
-.btn-primary {
-  background-color: #0D7ABC;
-  color: #fff;
-}
-
-.btn-primary:hover {
-  background-color: #095c8d;
 }
 
 .btn-view {
@@ -78,11 +144,11 @@ h1 {
 }
 
 .btn-danger {
-  background: #f8f8f8;
+  background: #f5f5f5;
   color: #444;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
 }
 
 .btn-danger:hover {
-  background: #f0f0f0;
+  background: #ebebeb;
 }

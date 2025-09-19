@@ -1,11 +1,11 @@
-<div class="alunos-container">
+<div class="container-oficina">
   <h1>Lista de Alunos</h1>
 
-  <div class="actions-top">
-    <button class="btn btn-primary" (click)="novoAluno()">+ Novo Aluno</button>
-  </div>
+  
+  <!-- Botão Novo Aluno -->
+  <button class="btn-primary btn-new" (click)="novoAluno()">＋ Adicionar novo aluno</button>
 
-  <div class="table-card">
+  <div class="table-wrap">
     <table class="table">
       <thead>
         <tr>
@@ -13,18 +13,18 @@
           <th>CPF</th>
           <th>Grupo</th>
           <th>Oficinas</th>
-          <th>Ações</th>
+          <th style="width: 160px;">Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let aluno of alunos">
+        <tr *ngFor="let aluno of alunos; let i = index">
           <td>{{ aluno.nome }}</td>
           <td>{{ aluno.cpf }}</td>
           <td>{{ aluno.grupo }}</td>
           <td>{{ aluno.oficinas }}</td>
           <td class="actions">
-            <button class="btn btn-view" (click)="editarAluno(aluno.id)">Editar</button>
-            <button class="btn btn-danger" (click)="deletarAluno(aluno.id)">Excluir</button>
+            <button class="btn btn-view" (click)="editarAluno(aluno.id)">Visualizar</button>
+            <button class="btn btn-danger" (click)="deletarAluno(aluno.id)">Deletar</button>
           </td>
         </tr>
       </tbody>
