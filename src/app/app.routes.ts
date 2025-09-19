@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { TabelaComponent } from './components/tabela/tabela.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
@@ -41,10 +40,5 @@ export const routes: Routes = [
       },
     ],
   },
-  
   { path: '**', redirectTo: 'auth/login' },
-  {
-    path: 'tabela',
-    component: TabelaComponent
-  }
 ];

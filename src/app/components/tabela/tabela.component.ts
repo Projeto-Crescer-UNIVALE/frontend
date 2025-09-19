@@ -3,6 +3,7 @@ import { Component, DestroyRef, inject, input, OnInit, output, signal } from '@a
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { distinctUntilChanged, take } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 export interface Coluna {
   campo: string;   // chave no objeto de dados (ex.: 'nome', 'cpf', 'email')
@@ -10,11 +11,24 @@ export interface Coluna {
   width?: string;  // opcional (ex.: '180px')
 }
 
+export interface ResultadoPaginado {
+  data: any[];
+  meta: {
+    total: number,
+    lastPage: number,
+    currentPage: number,
+    perPage: number,
+    prev: number,
+    next: number
+  }
+}
+
 @Component({
   selector: 'app-tabela',
   standalone: true,
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css'],
+  imports: [CommonModule],
 })
 
 export class TabelaComponent implements OnInit {
@@ -30,6 +44,15 @@ export class TabelaComponent implements OnInit {
 
   dados = signal<any[]>([]); // SIGNAL para dados
 
+  paginacao = signal<ResultadoPaginado['meta']>({
+    total: 0,
+    lastPage: 0,
+    currentPage: 0,
+    perPage: 0,
+    prev: 0,
+    next: 0,
+  })
+
   get termoPesquisa() {
     return this.activatedRoute.snapshot.queryParams['search'] || '';
   }
@@ -40,16 +63,18 @@ export class TabelaComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.pipe(distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe((queryParams) => {
       const search = queryParams['search'] || '';
+      const pagina = queryParams['page'] || 1;
       this.termoPesquisa.set(search);
-      this.carregarDados(search);
+      this.carregarDados(search, pagina);
     })
   }
 
-  private carregarDados(search: string = '') {
-    const url = search ? `${this.endpoint()}?search=${encodeURIComponent(search)}` : this.endpoint();
+  private carregarDados(search: string = '', pagina: number = 1) {
+    const url = search ? `${this.endpoint()}?search=${encodeURIComponent(search)}&page=${pagina}` : this.endpoint();
 
-    this.http.get<any[]>(url).pipe(take(1)).subscribe(response => {
-      this.dados.set(response);
+    this.http.get<ResultadoPaginado>(`http://localhost:3000/${url}`).pipe(take(1)).subscribe(response => {
+      this.dados.set(response.data);
+      this.paginacao.set(response.meta)
     });
   }
 
@@ -69,5 +94,27 @@ export class TabelaComponent implements OnInit {
 
   onDeletar(linha: any) {
     this.acaoSecundaria.emit(linha);
+  }
+
+  alterarPagina(pagina: number) {
+    this.router.navigate([], {
+      queryParams: { page: pagina },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  getColumnValue(linha: any, campo: string): any {
+    const campos = campo.split('.');
+    let valor = linha;
+
+    for (const c of campos) {
+      if (valor && c in valor) {
+        valor = valor[c];
+      } else {
+        return null;
+      }
+    }
+
+    return valor;
   }
 }

@@ -1,18 +1,19 @@
 <div class="search-card">
   <div class="search-row">
     <div class="search-input-wrap">
+      <span class="material-symbols-outlined search-icon">search</span>
       <input
         type="text"
-        placeholder="Pesquisar..."
-        [value]="termoPesquisa()"
+        placeholder="Digite sua pesquisa..."
+        [value]="termoPesquisa"
         (keyup)="onPesquisar($event)"
         class="input-pesquisa"
       />
     </div>
   </div>
 </div>
-
-<div class="table-wap">
+<ng-content></ng-content>
+<div class="table-wrap">
   <table class="table">
     <thead>
       <tr>
@@ -32,18 +33,16 @@
           Sem dados
         </td>
       </tr>
-      } @else { @for (linha of dados(); track linha.id ?? $index) {
+      } @else { @for (linha of dados(); track $index) {
       <tr>
-        <ng-container>
-          @for (coluna of colunas(); track coluna.campo) {
-          <td>{{ linha[coluna.campo] }}</td>
-          }
-        </ng-container>
-        <td class="acoes">
-          <button class="btn btn-primario" (click)="onVisualizar(linha)">
+        @for (coluna of colunas(); track coluna.campo) {
+        <td>{{ getColumnValue(linha, coluna.campo) }}</td>
+        }
+        <td class="actions">
+          <button class="btn btn-view" (click)="onVisualizar(linha)">
             {{ textoVisualizar() }}
           </button>
-          <button class="btn btn-perigo" (click)="onDeletar(linha)">
+          <button class="btn btn-danger" (click)="onDeletar(linha)">
             {{ textoDeletar() }}
           </button>
         </td>
@@ -51,4 +50,27 @@
       } }
     </tbody>
   </table>
+  <div class="paginacao">
+    <button
+      class="btn"
+      [disabled]="paginacao().currentPage <= 1"
+      [ngClass]="{ 'btn-danger': paginacao().currentPage <= 1 }"
+      {click}="alterarPagina(paginacao().prev())"
+    >
+      Anterior
+    </button>
+    <span
+      >Página {{ paginacao().currentPage }} de {{ paginacao().lastPage }}</span
+    >
+    <button
+      class="btn"
+      [disabled]="paginacao().currentPage >= paginacao().lastPage"
+      [ngClass]="{
+        'btn-danger': paginacao().currentPage >= paginacao().lastPage
+      }"
+      {click}="alterarPagina(paginacao().next)"
+    >
+      Próximo
+    </button>
+  </div>
 </div>

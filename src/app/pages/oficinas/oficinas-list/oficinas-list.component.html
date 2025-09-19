@@ -1,44 +1,11 @@
 <div class="container-oficina">
   <h1>Lista de Oficinas</h1>
-
-  <!-- Card de busca -->
-  <div class="search-card">
-    <div class="search-row">
-      <div class="search-input-wrap">
-        <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" placeholder="Digite sua pesquisa..." [(ngModel)]="termo" />
-      </div>
-      <button class="btn-primary" (click)="pesquisar()">Pesquisar</button>
-    </div>
-  </div>
-
-  <button class="btn-primary btn-new" routerLink="/oficinas/novo">
-    ＋ Cadastrar nova oficina
-  </button>
-
-  <div class="table-wrap">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Professor</th>
-          <th>Dias da Semana</th>
-          <th>Horário</th>
-          <th style="width:160px;"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let o of listaFiltrada; let i = index" [class.zebra]="i % 2 === 1">
-          <td>{{ o.nome }}</td>
-          <td>{{ o.professor }}</td>
-          <td>{{ o.dias }}</td>
-          <td>{{ o.horario }}</td>
-          <td class="actions">
-            <a class="btn btn-view" [routerLink]="['/oficinas', o.id]">Editar</a>
-            <button class="btn btn-danger" (click)="deletar(o.id)">Excluir</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <app-tabela
+    [colunas]="colunas"
+    endpoint="oficina"
+  >
+    <button class="btbn-primary btn-new" routerLink="novo">
+      Cadastrar nova oficina
+    </button>
+  </app-tabela>
 </div>

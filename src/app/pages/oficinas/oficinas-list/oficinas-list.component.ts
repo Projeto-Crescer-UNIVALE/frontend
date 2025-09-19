@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { TabelaComponent, Coluna } from '../../../components/tabela/tabela.component';
 
 type Oficina = {
   id: number;
@@ -14,30 +15,25 @@ type Oficina = {
 @Component({
   selector: 'app-oficinas-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, TabelaComponent],
   templateUrl: './oficinas-list.component.html',
   styleUrls: ['./oficinas-list.component.css']
 })
+
 export class OficinasListComponent {
-  termo = '';
-  oficinas: Oficina[] = [
-    { id: 1, nome: 'Oficina de Música', professor: 'João', dias: 'Domingo', horario: '00:00 - 00:00' },
-    { id: 2, nome: 'Oficina de Arte', professor: 'Maria', dias: 'Segunda', horario: '08:00 - 10:00' },
-    { id: 3, nome: 'Oficina de Esportes', professor: 'Ana', dias: 'Quarta', horario: '14:00 - 16:00' },
-  ];
 
-  get listaFiltrada(): Oficina[] {
-    const t = this.termo.trim().toLowerCase();
-    if (!t) return this.oficinas;
-    return this.oficinas.filter(o =>
-      o.nome.toLowerCase().includes(t) ||
-      o.professor.toLowerCase().includes(t) ||
-      o.dias.toLowerCase().includes(t)
-    );
-  }
-
-  pesquisar() {/* filtragem já é reativa pelo getter */}
-  deletar(id: number) {
-    this.oficinas = this.oficinas.filter(o => o.id !== id);
-  }
+  readonly colunas: Coluna[] = [
+    {
+      nome: 'ID', campo: 'nome',
+    },
+    {
+      nome: 'Professor', campo: 'funcionario.nome',
+    },
+    {
+      nome: 'Dias', campo: 'oficinacronograma.dia',
+    },
+    {
+      nome: 'Horario', campo: 'oficinacronograma.hora_inicio',
+    },
+  ]
 }
