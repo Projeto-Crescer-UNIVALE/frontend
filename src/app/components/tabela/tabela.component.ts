@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, DestroyRef, inject, input, OnInit, output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { distinctUntilChanged, take } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
@@ -28,9 +28,8 @@ export interface ResultadoPaginado {
   standalone: true,
   templateUrl: './tabela.component.html',
   styleUrls: ['./tabela.component.css'],
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
 })
-
 export class TabelaComponent implements OnInit {
   private http = inject(HttpClient);
   private router = inject(Router);
@@ -41,6 +40,7 @@ export class TabelaComponent implements OnInit {
   colunas = input<Coluna[]>([]);
   textoVisualizar = input<string>('Visualizar');
   textoDeletar    = input<string>('Deletar');
+  campoIdentificador = input.required<string>();
 
   dados = signal<any[]>([]); // SIGNAL para dados
 
@@ -64,13 +64,12 @@ export class TabelaComponent implements OnInit {
     this.activatedRoute.queryParams.pipe(distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe((queryParams) => {
       const search = queryParams['search'] || '';
       const pagina = queryParams['page'] || 1;
-      this.termoPesquisa.set(search);
       this.carregarDados(search, pagina);
     })
   }
 
   private carregarDados(search: string = '', pagina: number = 1) {
-    const url = search ? `${this.endpoint()}?search=${encodeURIComponent(search)}&page=${pagina}` : this.endpoint();
+    const url = search ? `${this.endpoint()}?search=${encodeURIComponent(search)}&page=${pagina}` : `${this.endpoint()}?page=${pagina}`;
 
     this.http.get<ResultadoPaginado>(`http://localhost:3000/${url}`).pipe(take(1)).subscribe(response => {
       this.dados.set(response.data);

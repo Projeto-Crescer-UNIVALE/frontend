@@ -1,16 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TabelaComponent, Coluna } from '../../../components/tabela/tabela.component';
-
-type Oficina = {
-  id: number;
-  nome: string;
-  professor: string;
-  dias: string;
-  horario: string;
-};
 
 @Component({
   selector: 'app-oficinas-list',
@@ -24,16 +16,10 @@ export class OficinasListComponent {
 
   readonly colunas: Coluna[] = [
     {
-      nome: 'ID', campo: 'nome',
+      nome: 'Nome', campo: 'nome',
     },
     {
       nome: 'Professor', campo: 'funcionario.nome',
-    },
-    {
-      nome: 'Dias', campo: 'oficinacronograma.dia',
-    },
-    {
-      nome: 'Horario', campo: 'oficinacronograma.hora_inicio',
     },
   ]
 }
