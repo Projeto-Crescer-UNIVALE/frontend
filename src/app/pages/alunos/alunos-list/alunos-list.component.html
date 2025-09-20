@@ -1,33 +1,12 @@
 <div class="container-oficina">
   <h1>Lista de Alunos</h1>
-
-  
-  <!-- Botão Novo Aluno -->
-  <button class="btn-primary btn-new" (click)="novoAluno()">＋ Adicionar novo aluno</button>
-
-  <div class="table-wrap">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>CPF</th>
-          <th>Grupo</th>
-          <th>Oficinas</th>
-          <th style="width: 160px;">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let aluno of alunos; let i = index">
-          <td>{{ aluno.nome }}</td>
-          <td>{{ aluno.cpf }}</td>
-          <td>{{ aluno.grupo }}</td>
-          <td>{{ aluno.oficinas }}</td>
-          <td class="actions">
-            <button class="btn btn-view" (click)="editarAluno(aluno.id)">Visualizar</button>
-            <button class="btn btn-danger" (click)="deletarAluno(aluno.id)">Deletar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <app-tabela
+    [colunas]="colunas"
+    endpoint="aluno"
+    campoIdentificador="id_aluno"
+  >
+    <button class="btn-primary btn-new" routerLink="novo">
+      + Adicionar novo aluno
+    </button>
+  </app-tabela>
 </div>
