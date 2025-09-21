@@ -9,18 +9,18 @@
   <h1>Editar aluno</h1>
  
   <div class="tabs">
-    <button class="tab active">Informações cadastrais</button>
-    <button class="tab">Diário</button>
+    <a class="tab" [routerLink]="['..']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Informações cadastrais</a>
+    <a class="tab" [routerLink]="[]" routerLinkActive="active">Diário</a>
   </div>
 
   <div class="search-card">
     <div class="search-row">
          <span class="material-symbols-outlined search-icon">search</span>
       <input type="text" placeholder="Digite sua pesquisa..." />
-      <button class="btn-primary" (click)="pesquisar()">Pesquisar</button>
+      <button class="btn-primary">Pesquisar</button>
     </div>
     <button class="btn-add">+ Adicionar novo registro</button>
-  </div><br><br><br><br>
+  </div>
 
   <div class="lista-registros">
     <div class="card-registro">

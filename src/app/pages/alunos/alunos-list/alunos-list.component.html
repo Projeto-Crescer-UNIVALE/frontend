@@ -1,41 +1,11 @@
 <div class="container-oficina">
   <h1>Lista de Alunos</h1>
 
-  <div class="search-card">
-    <div class="search-row">
-      <div class="search-input-wrap">
-        <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" placeholder="Digite sua pesquisa..." [(ngModel)]="termo" />
-      </div>
-      <button class="btn-primary" (click)="pesquisar()">Pesquisar</button>
-    </div>
-  </div>
-  
-  <button class="btn-primary btn-new" routerLink="/alunos/novo">＋ Adicionar novo aluno</button>
-
-  <div class="table-wrap">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>CPF</th>
-          <th>Grupo</th>
-          <th>Oficinas</th>
-          <th style="width: 160px;">Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let aluno of alunos; let i = index">
-          <td>{{ aluno.nome }}</td>
-          <td>{{ aluno.cpf }}</td>
-          <td>{{ aluno.grupo }}</td>
-          <td>{{ aluno.oficinas }}</td>
-          <td class="actions">
-            <button class="btn btn-view" [routerLink]="['/alunos', aluno.id]">Editar</button>
-            <button class="btn btn-danger" (click)="deletar(aluno.id)">Deletar</button>
-          </td>
-        </tr> 
-      </tbody>
-    </table>
-  </div>
+  <app-tabela
+    [colunas]="colunas"
+    endpoint="aluno"
+    campoIdentificador="id_aluno"
+  >
+    <button class="btn-primary btn-new" routerLink="novo">+ Adicionar novo aluno</button>
+  </app-tabela>
 </div>

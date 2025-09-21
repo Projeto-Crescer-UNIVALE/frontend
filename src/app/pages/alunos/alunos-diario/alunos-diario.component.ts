@@ -14,7 +14,6 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
 })
 export class AlunosDiarioComponent implements OnInit {
   id!: string;
-pesquisar: any;
 
   constructor(private route: ActivatedRoute) {}
 

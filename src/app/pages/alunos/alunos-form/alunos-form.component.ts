@@ -42,7 +42,8 @@ export class AlunosFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.id = this.route.snapshot.paramMap.get('id') !== 'novo' ? Number(this.route.snapshot.paramMap.get('id')) : undefined;
+
     if (this.id) {
      
     }
