@@ -8,7 +8,7 @@ export interface Funcionario {
   id: number;      // <- era "1"
   nome: string;
   email: string;
-  perfil: string;
+  perfil: 'Administrador' | 'Professor';
 }
 
 export interface ApiError {

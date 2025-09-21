@@ -12,16 +12,16 @@
       <nav class="header-nav">
         <ul>
           <li>
-            <a routerLink="/dashboard" routerLinkActive="active">Painel</a>
+            <a routerLink="dashboard" routerLinkActive="active">Painel</a>
           </li>
           <li>
-            <a routerLink="/alunos" routerLinkActive="active">Alunos</a>
+            <a routerLink="alunos" routerLinkActive="active">Alunos</a>
           </li>
           <li>
-            <a routerLink="/usuarios" routerLinkActive="active">Usuários</a>
+            <a routerLink="usuarios" routerLinkActive="active">Usuários</a>
           </li>
           <li>
-            <a routerLink="/oficinas" routerLinkActive="active">Oficinas</a>
+            <a routerLink="oficinas" routerLinkActive="active">Oficinas</a>
           </li>
         </ul>
       </nav>
@@ -29,9 +29,9 @@
 
     <div class="header-user">
       <button (click)="toggleDropdown()" class="avatar-button">
-        <img 
-          [src]="'https://ui-avatars.com/api/?name=' + userName + '&background=f0f0f0&color=333&rounded=true&size=40'" 
-          [alt]="'Avatar de ' + userName" 
+        <img
+          [src]="'https://ui-avatars.com/api/?name=' + user?.nome + '&background=f0f0f0&color=333&rounded=true&size=40'"
+          [alt]="'Avatar de ' + user?.nome"
           class="user-avatar"
         />
       </button>
