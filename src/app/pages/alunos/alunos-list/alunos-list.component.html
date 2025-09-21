@@ -1,0 +1,11 @@
+<div class="container-oficina">
+  <h1>Lista de Alunos</h1>
+
+  <app-tabela
+    [colunas]="colunas"
+    endpoint="aluno"
+    campoIdentificador="id_aluno"
+  >
+    <button class="btn-primary btn-new" routerLink="novo">+ Adicionar novo aluno</button>
+  </app-tabela>
+</div>

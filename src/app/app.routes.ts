@@ -41,6 +41,24 @@ export const routes: Routes = [
           { path: ':id', loadComponent: () => import('./pages/oficinas/oficina-form/oficina-form.component').then(m => m.OficinaFormComponent) },
         ]
       },
+
+      { 
+        path: 'alunos',
+        children: [
+          { path: '', loadComponent: () => import('./pages/alunos/alunos-list/alunos-list.component').then(m => m.AlunosListComponent) },
+          {
+            path: ':id',
+            children: [
+              {
+                path: '',
+                loadComponent: () => import('./pages/alunos/alunos-form/alunos-form.component').then(m => m.AlunosFormComponent),
+                pathMatch: 'full'
+              },
+              { path: 'diario', loadComponent: () => import('./pages/alunos/alunos-diario/alunos-diario.component').then(m => m.AlunosDiarioComponent) }
+            ]
+          },
+        ]
+      },
       { path: '**', redirectTo: 'dashboard' },
     ],
   },
