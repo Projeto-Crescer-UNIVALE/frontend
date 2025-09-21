@@ -13,6 +13,8 @@ export class AuthService {
       const userData = localStorage.getItem('pcrescer_data');
       if (userData) {
         const { funcionario } = JSON.parse(userData) as AuthResponse;
+
+        this.user = funcionario;
       }
     }
   }
