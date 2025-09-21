@@ -1,49 +1,12 @@
 <div class="container-usuario">
   <h1>Lista de Usuários</h1>
-
-  <!-- Card de busca -->
-  <div class="search-card">
-    <div class="search-row">
-      <div class="search-input-wrap">
-        <span class="material-symbols-outlined search-icon">search</span>
-        <input type="text" placeholder="Digite sua pesquisa..." [(ngModel)]="termo" />
-      </div>
-
-      <select [(ngModel)]="tipoSelecionado" class="select-tipo">
-        <option value="">Tipo</option>
-        <option value="Administrador">Administrador</option>
-        <option value="Professor">Professor</option>
-      </select>
-
-      <button class="btn-primary" (click)="pesquisar()">Pesquisar</button>
-    </div>
-  </div>
-
-  <button class="btn-primary btn-new" routerLink="/usuarios/novo">
-    ＋ Cadastrar novo usuário
-  </button>
-
-  <div class="table-wrap">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Tipo</th>
-          <th>E-mail</th>
-          <th style="width:160px;"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let u of listaFiltrada; let i = index" [class.zebra]="i % 2 === 1">
-          <td>{{ u.nome }}</td>
-          <td>{{ u.tipo }}</td>
-          <td>{{ u.email }}</td>
-          <td class="actions">
-            <a class="btn btn-view" [routerLink]="['/usuarios', u.id]">Visualizar</a>
-            <button class="btn btn-danger" (click)="deletar(u.id)">Deletar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <app-tabela
+    [colunas]="colunas"
+    endpoint="funcionario"
+    campoIdentificador="id_funcionario"
+  >
+    <button class="btn-primary btn-new" routerLink="novo">
+      + Cadastrar novo usuário
+    </button>
+  </app-tabela>
 </div>
