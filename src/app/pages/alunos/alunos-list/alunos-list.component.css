@@ -1,13 +1,11 @@
-/* Container principal */
 .container-oficina {
   padding: 32px 64px;
-  background-color: #f5f6f8; /* cinza bem claro do fundo */
+  background-color: #f5f6f8;
   font-family: "Poppins", sans-serif;
   color: #333;
   min-height: 100vh;
 }
 
-/* Título da página */
 .container-oficina h1 {
   font-weight: 600;
   font-size: 24px;
@@ -15,27 +13,30 @@
   color: #0D7ABC;
 }
 
-/* Card de busca */
 .search-card {
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 12px 16px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 14px 16px;
   margin-bottom: 20px;
+  max-width: 500px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.search-row {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Input de pesquisa */
 .search-input-wrap {
   display: flex;
   align-items: center;
   flex: 1;
   background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 0 10px;
+  border: 1px solid #cfcfcf;
+  border-radius: 8px;
+  padding: 0 12px;
 }
 
 .search-input-wrap input {
@@ -43,16 +44,15 @@
   outline: none;
   flex: 1;
   font-size: 14px;
-  padding: 8px;
+  padding: 10px;
   font-family: "Poppins", sans-serif;
 }
 
 .search-icon {
   font-size: 20px;
   color: #777;
-  margin-right: 6px;
+  margin-right: 8px;
 }
-
 /* Botão principal */
 .btn-primary {
   display: inline-flex;
@@ -78,7 +78,6 @@
   margin-bottom: 15px;
 }
 
-/* Tabela */
 .table-wrap {
   overflow-x: auto;
   background: #fff;
@@ -112,12 +111,10 @@
   border-top: 1px solid #eee;
 }
 
-/* Zebra */
 .table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-/* Ações */
 .actions {
   display: flex;
   gap: 6px;

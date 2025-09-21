@@ -8,6 +8,15 @@
 
   <h1>{{ id ? 'Editar Aluno' : 'Adicionar novo Aluno' }}</h1>
 
+  <div class="tabs">
+  <a class="tab" [routerLink]="['/alunos', id]" routerLinkActive="active">
+    Informações cadastrais
+  </a>
+  <a class="tab" [routerLink]="['/alunos/diario', id]" routerLinkActive="active">
+    Diário
+  </a>
+</div>
+
   <form [formGroup]="form" (ngSubmit)="salvar()">
     <h2>Informações básicas</h2>
     <div class="form-grid-3col">

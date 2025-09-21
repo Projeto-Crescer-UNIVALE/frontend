@@ -44,6 +44,7 @@ export const routes: Routes = [
         children: [
           { path: '', loadComponent: () => import('./pages/alunos/alunos-list/alunos-list.component').then(m => m.AlunosListComponent) },
           { path: ':id', loadComponent: () => import('./pages/alunos/alunos-form/alunos-form.component').then(m => m.AlunosFormComponent) },
+          { path: 'diario/:id', loadComponent: () => import('./pages/alunos/alunos-diario/alunos-diario.component').then(m => m.AlunosDiarioComponent) }
         ]
       },
     ],

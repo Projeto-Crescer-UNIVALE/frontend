@@ -3,12 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective } from 'ngx-mask';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-alunos-form',
   templateUrl: './alunos-form.component.html',
   styleUrls: ['./alunos-form.component.css'],
-  imports:[CommonModule, ReactiveFormsModule, NgxMaskDirective]
+  imports:[CommonModule, ReactiveFormsModule, NgxMaskDirective, RouterModule],
+  standalone: true
 })
 export class AlunosFormComponent implements OnInit {
   id?: number;
@@ -42,8 +44,7 @@ export class AlunosFormComponent implements OnInit {
   ngOnInit() {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     if (this.id) {
-      // aqui você carregaria os dados do back-end e faria:
-      // this.form.patchValue(dadosAluno);
+     
     }
   }
 
