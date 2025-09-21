@@ -32,9 +32,8 @@ export class LoginComponent {
       .subscribe({
         next: (response) => {
           if (response.accessToken) {
-            this.authService.user = response.funcionario;
-            localStorage.setItem('accessToken', response.accessToken);
-            this.router.navigate(['dashboard']);
+            this.authService.setLoginData(response);
+            this.router.navigate(['painel/dashboard']);
           }
         },
         error: (err) => { console.error('Erro no login:', err); }

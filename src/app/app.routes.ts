@@ -1,23 +1,26 @@
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { NotAuthGuard } from './core/guards/not-auth.guard';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
-
   {
     path: 'auth',
     component: AuthLayoutComponent,
+    canActivateChild: [NotAuthGuard],
     children: [
       { path: 'login', loadComponent: () => import('./pages/auth/login/login.component').then(m => m.LoginComponent) },
       { path: 'forgot-password', loadComponent: () => import('./pages/auth/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent) },
       { path: 'create-password/:token', loadComponent: () => import('./pages/auth/create-password/create-password.component').then(m => m.CreatePasswordComponent) },
       { path: 'reset-password/:token', loadComponent: () => import('./pages/auth/reset-password/reset-password.component').then(m => m.ResetPasswordComponent) },
+      { path: '**', redirectTo: 'login' },
     ]
   },
   {
-    path: '',
+    path: 'painel',
     component: MainLayoutComponent,
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -47,6 +50,7 @@ export const routes: Routes = [
           { path: 'diario/:id', loadComponent: () => import('./pages/alunos/alunos-diario/alunos-diario.component').then(m => m.AlunosDiarioComponent) }
         ]
       },
+      { path: '**', redirectTo: 'dashboard' },
     ],
   },
   { path: '**', redirectTo: 'auth/login' },

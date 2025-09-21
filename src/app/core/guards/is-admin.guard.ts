@@ -10,5 +10,5 @@ export const IsAdminGuard: CanActivateFn = () => {
     return true;
   }
 
-  return new RedirectCommand(router.parseUrl('/login'));
+  return new RedirectCommand(router.parseUrl('/auth/login'));
 };

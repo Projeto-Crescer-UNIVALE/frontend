@@ -7,12 +7,9 @@ export const NotAuthGuard: CanActivateFn = () => {
   const router = inject(Router);
 
   if (authService.isAuthenticated()) {
-    if (authService.user?.perfil === 'Administrador') {
-      return new RedirectCommand(router.parseUrl('/dashboard'));
-    }
-    if (authService.user?.perfil === 'Professor') {
-      return new RedirectCommand(router.parseUrl('/oficinas'));
-    }
+    const route = router.parseUrl(authService.getUser()?.perfil === 'Administrador' ? '/painel/dashboard' : '/painel/oficinas');
+
+    return new RedirectCommand(route);
   }
   return true;
 };

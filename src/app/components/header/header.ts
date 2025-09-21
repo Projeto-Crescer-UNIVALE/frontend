@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/sevices/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,19 +17,22 @@ import { CommonModule } from '@angular/common';
 })
 
 export class HeaderComponent {
-  @Input() userName: string = "Usuário Logado";
-  @Output() logoutClick = new EventEmitter<void>();
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
 
   dropdownOpen = false;
-  
+
   toggleDropdown(): void {
     this.dropdownOpen = !this.dropdownOpen;
   }
 
 
   logout(): void {
-    console.log("Usuário encerrou a sessão.");
-    this.dropdownOpen = false;
-    this.logoutClick.emit(); 
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
+  }
+
+  get user() {
+    return this.authService.getUser();
   }
 }
