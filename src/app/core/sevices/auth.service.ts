@@ -8,10 +8,33 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000/auth';
   public user: Funcionario | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    if (!this.user) {
+      const userData = localStorage.getItem('pcrescer_data');
+      if (userData) {
+        const { funcionario } = JSON.parse(userData) as AuthResponse;
+
+        this.user = funcionario;
+      }
+    }
+  }
 
   login(email: string, senha: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { email, senha });
+  }
+
+  setLoginData(data: AuthResponse) {
+    this.user = data.funcionario;
+    localStorage.setItem('pcrescer_data', JSON.stringify({ funcionario: data.funcionario, accessToken: data.accessToken, expiresAt: data.expiresAt }))
+  }
+
+  getUser(): Funcionario | null {
+    return this.user;
+  }
+
+  logout() {
+    this.user = null;
+    localStorage.removeItem('pcrescer_data');
   }
 
   setUser(user: Funcionario, token: string) {
@@ -37,10 +60,15 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.user && !!localStorage.getItem('accessToken');
+    const data = localStorage.getItem('pcrescer_data');
+    if (!data) { return false };
+
+    const { accessToken, funcionario } = JSON.parse(data) as AuthResponse;
+
+    return !!accessToken && !!funcionario;
   }
 
   isAdmin(): boolean {
-    return this.user?.perfil === 'Administrador';
+    return this.getUser()?.perfil === 'Administrador';
   }
 }
