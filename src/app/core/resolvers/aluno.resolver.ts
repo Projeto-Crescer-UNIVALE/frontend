@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, forkJoin, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AlunoService } from '../sevices/aluno.service';
-import { OficinaService } from '../sevices/oficina.service';
-import { ProgramaSocialService } from '../sevices/programa-social.service';
+import { AlunoService } from '../services/aluno.service';
+import { OficinaService } from '../services/oficina.service';
+import { ProgramaSocialService } from '../services/programa-social.service';
 
 @Injectable({ providedIn: 'root' })
 export class AlunoResolver implements Resolve<any> {

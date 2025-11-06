@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { take } from 'rxjs';
-import { AuthService } from '../../../core/sevices/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   standalone: true,

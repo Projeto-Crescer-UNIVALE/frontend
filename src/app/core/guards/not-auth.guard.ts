@@ -1,5 +1,5 @@
 import { CanActivateFn, RedirectCommand, Router } from '@angular/router';
-import { AuthService } from '../sevices/auth.service';
+import { AuthService } from '../services/auth.service';
 import { inject } from '@angular/core';
 
 export const NotAuthGuard: CanActivateFn = () => {

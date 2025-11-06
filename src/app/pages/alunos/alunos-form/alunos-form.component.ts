@@ -4,9 +4,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators, ValidationErro
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective } from 'ngx-mask';
 import { RouterModule } from '@angular/router';
-import { AlunoService } from '../../../core/sevices/aluno.service';
-import { OficinaService } from '../../../core/sevices/oficina.service';
-import { ProgramaSocialService } from '../../../core/sevices/programa-social.service';
+import { AlunoService } from '../../../core/services/aluno.service';
+import { OficinaService } from '../../../core/services/oficina.service';
+import { ProgramaSocialService } from '../../../core/services/programa-social.service';
 
 @Component({
   selector: 'app-alunos-form',
@@ -34,8 +34,8 @@ export class AlunosFormComponent implements OnInit {
     telefone: new FormControl('', { validators: [Validators.required], nonNullable: true }),
     grupo_scfv: new FormControl('0', { validators: [Validators.required], nonNullable: true }),
     situacao_escolar: new FormControl('0', { validators: [Validators.required], nonNullable: true }),
-    programaSocial: new FormControl([], { validators: [Validators.required, this.arrayNotEmpty], nonNullable: true }),
-    oficinas: new FormControl([], { validators: [Validators.required, this.arrayNotEmpty], nonNullable: true }),
+    programaSocial: new FormControl('', { validators: [Validators.required], nonNullable: true }),
+    oficinas: new FormControl('', { validators: [Validators.required], nonNullable: true }),
     alergias: new FormControl('', { validators: [Validators.maxLength(100)], nonNullable: true }),
     necessidades_especiais: new FormControl('', { validators: [Validators.maxLength(120)], nonNullable: true }),
     medicamentos: new FormControl('', { validators: [Validators.maxLength(200)], nonNullable: true }),
@@ -53,12 +53,21 @@ export class AlunosFormComponent implements OnInit {
 
   ngOnInit() {
     const dados = this.route.snapshot.data['dados'];
+    console.log('Dados completos:', dados);
 
     this.oficinasDisponiveis = dados.oficinas;
     this.programasSociaisDisponiveis = dados.programas;
 
     const aluno = dados.aluno;
-    this.id = aluno?.id
+    console.log('Dados do aluno:', aluno);
+    console.log('Programa social do aluno:', aluno?.programaSocial);
+
+    // Verifica se o ID vem do aluno ou da URL
+    if (aluno && aluno.id_aluno) {
+      this.id = aluno.id_aluno;
+    } else if (this.route.snapshot.paramMap.get('id') !== 'novo') {
+      this.id = Number(this.route.snapshot.paramMap.get('id'));
+    }
 
     if (aluno) {
       if (aluno.data_nascimento) {
@@ -70,9 +79,35 @@ export class AlunosFormComponent implements OnInit {
         aluno.oficinas = aluno.oficinas.filter((o: any) => o.ativo).map((o: any) => o.id_oficina);
       }
 
-      if (aluno.programaSocial && Array.isArray(aluno.programaSocial)) {
-        aluno.programaSocial = aluno.programaSocial.map((p: any) => p.id_programa_social);
+      if (aluno.programaSocial) {
+        console.log('Tipo do programaSocial:', typeof aluno.programaSocial);
+
+        // Se vier como array de objetos
+        if (Array.isArray(aluno.programaSocial)) {
+          console.log('ProgramaSocial é um array:', aluno.programaSocial);
+          if (aluno.programaSocial.length > 0) {
+            const program = aluno.programaSocial[0];
+            // Verifica se é um objeto com id_programa_social ou apenas um ID
+            const programId = typeof program === 'object' ? program.id_programa_social : program;
+            aluno.programaSocial = programId;
+            console.log('ID do programa extraído:', programId);
+          }
+        }
+        // Se vier como objeto único
+        else if (typeof aluno.programaSocial === 'object') {
+          console.log('ProgramaSocial é um objeto:', aluno.programaSocial);
+          aluno.programaSocial = aluno.programaSocial.id_programa_social;
+        }
+        // Se já vier como ID
+        else {
+          console.log('ProgramaSocial é um valor primitivo:', aluno.programaSocial);
+          aluno.programaSocial = Number(aluno.programaSocial);
+        }
+      } else {
+        aluno.programaSocial = '';
       }
+
+      console.log('Valor final do programaSocial:', aluno.programaSocial);
 
       this.form.patchValue(aluno);
     }
@@ -146,13 +181,9 @@ export class AlunosFormComponent implements OnInit {
     formValue.grupo_scfv = parseInt(formValue.grupo_scfv, 10);
     formValue.situacao_escolar = parseInt(formValue.situacao_escolar, 10);
 
-    formValue.programaSocial = Array.isArray(formValue.programaSocial)
-      ? formValue.programaSocial.map((v: any) => parseInt(v, 10))
-      : [];
-
-    formValue.oficinas = Array.isArray(formValue.oficinas)
-      ? formValue.oficinas.map((v: any) => parseInt(v, 10))
-      : [];
+    // Converte os valores para arrays com um único item
+    formValue.programaSocial = formValue.programaSocial ? [parseInt(formValue.programaSocial, 10)] : [];
+    formValue.oficinas = formValue.oficinas ? [parseInt(formValue.oficinas, 10)] : [];
 
     formValue.alergias = formValue.alergias || '';
     formValue.necessidades_especiais = formValue.necessidades_especiais || '';
@@ -162,7 +193,7 @@ export class AlunosFormComponent implements OnInit {
 
     if (this.id) {
       this.alunoService.updateAluno(this.id, formValue).subscribe({
-        next: () => this.router.navigate(['/alunos']),
+        next: () => this.router.navigate(['/painel/alunos']),
         error: (err) => {
           console.error('Erro ao atualizar aluno: ', err);
           console.error('Erro completo:', JSON.stringify(err.error, null, 2));
@@ -173,7 +204,7 @@ export class AlunosFormComponent implements OnInit {
       });
     } else {
       this.alunoService.createAluno(formValue).subscribe({
-        next: () => this.router.navigate(['/alunos']),
+        next: () => this.router.navigate(['/painel/alunos']),
         error: (err) => {
           console.error('Erro ao criar aluno: ', err);
           console.error('Erro completo:', JSON.stringify(err.error, null, 2));

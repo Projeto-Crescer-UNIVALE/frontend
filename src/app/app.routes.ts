@@ -4,6 +4,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { AuthGuard } from './core/guards/auth.guard';
 import { NotAuthGuard } from './core/guards/not-auth.guard';
 import { AlunoResolver } from '../app/core/resolvers/aluno.resolver';
+import { OficinaResolver } from './core/resolvers/oficina.resolver';
 
 export const routes: Routes = [
   {
@@ -39,7 +40,11 @@ export const routes: Routes = [
         path: 'oficinas',
         children: [
           { path: '', loadComponent: () => import('./pages/oficinas/oficinas-list/oficinas-list.component').then(m => m.OficinasListComponent) },
-          { path: ':id', loadComponent: () => import('./pages/oficinas/oficina-form/oficina-form.component').then(m => m.OficinaFormComponent) },
+          {
+            path: ':id',
+            loadComponent: () => import('./pages/oficinas/oficina-form/oficina-form.component').then(m => m.OficinaFormComponent),
+            resolve: { dados: OficinaResolver },
+          },
         ]
       },
 
@@ -49,7 +54,7 @@ export const routes: Routes = [
           { path: '', loadComponent: () => import('./pages/alunos/alunos-list/alunos-list.component').then(m => m.AlunosListComponent) },
           {
             path: ':id',
-            resolve: { dados:AlunoResolver },
+            resolve: { dados: AlunoResolver },
             children: [
               {
                 path: '',

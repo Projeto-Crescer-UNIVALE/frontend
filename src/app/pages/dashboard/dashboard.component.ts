@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { take } from 'rxjs/operators';
-import { AuthService } from '../../core/sevices/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 interface DashboardInterface {
  alunosAtivos: number,

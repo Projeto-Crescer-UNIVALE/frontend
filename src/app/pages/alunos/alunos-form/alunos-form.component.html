@@ -93,6 +93,7 @@
       <div class="campo">
         <label>Oficinas</label>
         <select formControlName="oficinas">
+          <option value="">Selecione uma oficina</option>
           <option
             *ngFor="let oficina of oficinasDisponiveis"
             [value]="oficina.id_oficina"
@@ -118,9 +119,11 @@
       <div class="campo">
         <label>Programas Sociais</label>
         <select formControlName="programaSocial">
+          <option value="">Selecione um programa social</option>
           <option
             *ngFor="let programa of programasSociaisDisponiveis"
             [value]="programa.id_programa_social"
+            [selected]="form.get('programaSocial')?.value == programa.id_programa_social"
           >
             {{ programa.nome }}
           </option>

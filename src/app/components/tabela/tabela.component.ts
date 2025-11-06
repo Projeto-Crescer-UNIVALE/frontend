@@ -61,6 +61,16 @@ export class TabelaComponent implements OnInit {
   acaoSecundaria = output<any>(); // deletar
 
   ngOnInit() {
+    // Adiciona listener para recarregar dados
+    const element = document.querySelector('app-tabela');
+    if (element) {
+      element.addEventListener('reloadData', () => {
+        const search = this.activatedRoute.snapshot.queryParams['search'] || '';
+        const pagina = this.activatedRoute.snapshot.queryParams['page'] || 1;
+        this.carregarDados(search, pagina);
+      });
+    }
+
     this.activatedRoute.queryParams.pipe(distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe((queryParams) => {
       const search = queryParams['search'] || '';
       const pagina = queryParams['page'] || 1;
@@ -72,8 +82,16 @@ export class TabelaComponent implements OnInit {
     const url = search ? `${this.endpoint()}?search=${encodeURIComponent(search)}&page=${pagina}` : `${this.endpoint()}?page=${pagina}`;
 
     this.http.get<ResultadoPaginado>(`http://localhost:3000/${url}`).pipe(take(1)).subscribe(response => {
-      this.dados.set(response.data);
-      this.paginacao.set(response.meta)
+      // Filtra apenas os registros ativos
+      const dadosFiltrados = response.data.filter((item: any) => item.ativo !== false);
+      this.dados.set(dadosFiltrados);
+
+      // Atualiza a paginação considerando apenas os itens ativos
+      this.paginacao.set({
+        ...response.meta,
+        total: dadosFiltrados.length,
+        lastPage: Math.ceil(dadosFiltrados.length / response.meta.perPage)
+      });
     });
   }
 

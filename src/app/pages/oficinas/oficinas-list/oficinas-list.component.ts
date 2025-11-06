@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TabelaComponent, Coluna } from '../../../components/tabela/tabela.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-oficinas-list',
@@ -13,6 +14,7 @@ import { TabelaComponent, Coluna } from '../../../components/tabela/tabela.compo
 })
 
 export class OficinasListComponent {
+  private http = inject(HttpClient);
 
   readonly colunas: Coluna[] = [
     {
@@ -22,4 +24,17 @@ export class OficinasListComponent {
       nome: 'Professor', campo: 'funcionario.nome',
     },
   ]
+
+  deletarOficina(oficina: any) {
+    if (confirm(`Tem certeza que deseja excluir a oficina ${oficina.nome}?`)) {
+      this.http.delete(`http://localhost:3000/oficina/${oficina.id_oficina}`).subscribe(() => {
+        alert('Oficina deletada com sucesso!');
+        // Atualiza a tabela
+        const tabela = document.querySelector('app-tabela');
+        if (tabela) {
+          tabela.dispatchEvent(new CustomEvent('reloadData'));
+        }
+      });
+    }
+  }
 }
