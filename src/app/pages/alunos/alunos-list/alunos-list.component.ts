@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Coluna, TabelaComponent } from "../../../components/tabela/tabela.component";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-alunos-list',
   standalone: true,
   templateUrl: './alunos-list.component.html',
   styleUrls: ['./alunos-list.component.css'],
-  imports: [CommonModule, FormsModule, RouterModule, TabelaComponent] 
+  imports: [CommonModule, FormsModule, RouterModule, TabelaComponent]
 })
 export class AlunosListComponent {
   readonly colunas: Coluna[] = [
@@ -28,5 +29,14 @@ export class AlunosListComponent {
     },
   ]
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) { }
+
+  deletarAluno(aluno: any) {
+    if (confirm(`Tem certeza que deseja excluir o aluno ${aluno.nome}?`)) {
+      this.http.delete(`http://localhost:3000/aluno/${aluno.id_aluno}`).subscribe(() => {
+        alert('Aluno deletado com sucesso!');
+        window.location.reload();
+      });
+    }
+  }
 }

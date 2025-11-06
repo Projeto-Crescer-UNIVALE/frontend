@@ -3,6 +3,7 @@ import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.compon
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { NotAuthGuard } from './core/guards/not-auth.guard';
+import { AlunoResolver } from '../app/core/resolvers/aluno.resolver';
 
 export const routes: Routes = [
   {
@@ -42,12 +43,13 @@ export const routes: Routes = [
         ]
       },
 
-      { 
+      {
         path: 'alunos',
         children: [
           { path: '', loadComponent: () => import('./pages/alunos/alunos-list/alunos-list.component').then(m => m.AlunosListComponent) },
           {
             path: ':id',
+            resolve: { dados:AlunoResolver },
             children: [
               {
                 path: '',

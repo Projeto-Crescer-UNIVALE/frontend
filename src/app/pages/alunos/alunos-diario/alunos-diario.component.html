@@ -1,21 +1,26 @@
 <div class="container-aluno">
-  <!-- Breadcrumb -->
   <nav class="breadcrumb">
-    <a href="#">Alunos</a>
+    <a routerLink="/alunos">Alunos</a>
     <span>&gt;</span>
-    <span class="current">Editar aluno</span>
+    <span class="current">{{ aluno?.nome || "Carregando..." }}</span>
   </nav>
 
-  <h1>Editar aluno</h1>
- 
+  <h1>Diários do aluno</h1>
+
   <div class="tabs">
-    <a class="tab" [routerLink]="['..']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Informações cadastrais</a>
-    <a class="tab" [routerLink]="[]" routerLinkActive="active">Diário</a>
+    <a
+      class="tab"
+      [routerLink]="['..']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Informações cadastrais</a
+    >
+    <a class="tab active">Diário</a>
   </div>
 
   <div class="search-card">
     <div class="search-row">
-         <span class="material-symbols-outlined search-icon">search</span>
+      <span class="material-symbols-outlined search-icon">search</span>
       <input type="text" placeholder="Digite sua pesquisa..." />
       <button class="btn-primary">Pesquisar</button>
     </div>
@@ -23,52 +28,24 @@
   </div>
 
   <div class="lista-registros">
-    <div class="card-registro">
-      <div class="avatar">NP</div>
+    <div class="card-registro" *ngFor="let diario of diarios; let i = index">
+      <div class="avatar">
+        {{ diario.autor?.nome ? diario.autor.nome.charAt(0) : "N" }}
+      </div>
       <div class="conteudo">
         <div class="titulo">
-          <h3>Nome do professor</h3>
-          <span class="sub">Nome da oficina</span>
+          <h3>{{ diario.autor?.nome || "Professor desconhecido" }}</h3>
+          <span class="sub">{{ diario.oficina?.nome || "Sem oficina" }}</span>
         </div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum
-          sit amet lacus a sodales. Sed eu risus porta, condimentum sem ut,
-          sagittis enim. Donec ultrices vitae velit et suscipit.
-        </p>
-        <span class="data">12/04/2025</span>
+        <p>{{ diario.conteudo }}</p>
+        <span class="data">{{
+          diario.criado_em | date : "dd/MM/yyyy HH:mm"
+        }}</span>
       </div>
     </div>
 
-    <div class="card-registro">
-      <div class="avatar">NP</div>
-      <div class="conteudo">
-        <div class="titulo">
-          <h3>Nome do professor</h3>
-          <span class="sub">Nome da oficina</span>
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum
-          sit amet lacus a sodales. Sed eu risus porta, condimentum sem ut,
-          sagittis enim.
-        </p>
-        <span class="data">12/04/2025</span>
-      </div>
-    </div>
-
-    <div class="card-registro">
-      <div class="avatar">NP</div>
-      <div class="conteudo">
-        <div class="titulo">
-          <h3>Nome do professor</h3>
-          <span class="sub">Nome da oficina</span>
-        </div>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. In interdum
-          sit amet lacus a sodales. Sed eu risus porta, condimentum sem ut,
-          sagittis enim.
-        </p>
-        <span class="data">12/04/2025</span>
-      </div>
+    <div *ngIf="!diarios.length" class="sem-registros">
+      Nenhum registro encontrado para este aluno.
     </div>
   </div>
 </div>

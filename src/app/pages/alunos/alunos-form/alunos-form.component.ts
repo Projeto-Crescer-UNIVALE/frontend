@@ -52,59 +52,30 @@ export class AlunosFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.carregarOficinas();
-    this.carregarProgramasSociais();
+    const dados = this.route.snapshot.data['dados'];
 
+    this.oficinasDisponiveis = dados.oficinas;
+    this.programasSociaisDisponiveis = dados.programas;
 
-    this.id = this.route.snapshot.paramMap.get('id') !== 'novo' ? Number(this.route.snapshot.paramMap.get('id')) : undefined;
+    const aluno = dados.aluno;
+    this.id = aluno?.id
 
-    if (this.id) {
-      this.alunoService.getAlunos().subscribe({
-        next: (alunos) => {
-          const aluno = alunos.find((a: any) => a.id === this.id);
-          if (aluno) {
-            if (aluno.data_nascimento) {
-              const date = new Date(aluno.data_nascimento);
-              aluno.data_nascimento = date.toISOString().split('T')[0];
-            }
+    if (aluno) {
+      if (aluno.data_nascimento) {
+        const date = new Date(aluno.data_nascimento);
+        aluno.data_nascimento = date.toISOString().split('T')[0];
+      }
 
-            if (aluno.oficinas && Array.isArray(aluno.oficinas)) {
-              aluno.oficinas = aluno.oficinas
-                .filter((o: any) => o.ativo)
-                .map((o: any) => o.id_oficina);
-            }
+      if (aluno.oficinas && Array.isArray(aluno.oficinas)) {
+        aluno.oficinas = aluno.oficinas.filter((o: any) => o.ativo).map((o: any) => o.id_oficina);
+      }
 
-            if (aluno.programaSocial && Array.isArray(aluno.programaSocial)) {
-              aluno.programaSocial = aluno.programaSocial.map((p: any) => p.id_programa_social);
-            }
-            this.form.patchValue(aluno);
-          }
-        },
-        error: (err) => console.error('Erro ao carregar aluno: ', err),
-      });
+      if (aluno.programaSocial && Array.isArray(aluno.programaSocial)) {
+        aluno.programaSocial = aluno.programaSocial.map((p: any) => p.id_programa_social);
+      }
+
+      this.form.patchValue(aluno);
     }
-  }
-
-  carregarOficinas() {
-    this.oficinaService.getOficinas().subscribe({
-      next: (response) => {
-        // A API retorna paginação, então pegamos os dados
-        this.oficinasDisponiveis = response.data || response;
-        console.log('Oficinas carregadas:', this.oficinasDisponiveis);
-      },
-      error: (err) => console.error('Erro ao carregar oficinas: ', err)
-    });
-  }
-
-  carregarProgramasSociais() {
-    this.programaSocialService.getProgramasSociais().subscribe({
-      next: (response) => {
-        // A API pode retornar paginação, então pegamos os dados
-        this.programasSociaisDisponiveis = response.data || response;
-        console.log('Programas sociais carregados:', this.programasSociaisDisponiveis);
-      },
-      error: (err) => console.error('Erro ao carregar programas sociais: ', err)
-    });
   }
 
   private arrayNotEmpty(control: FormControl): ValidationErrors | null {

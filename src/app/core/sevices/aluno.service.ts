@@ -34,4 +34,12 @@ export class AlunoService {
     const headers = this.getAuthHeaders();
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
+
+  getAlunoById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
+  deleteAluno(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
 }
