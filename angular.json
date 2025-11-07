@@ -27,7 +27,13 @@
             "production": {
               "outputHashing": "all",
               "optimization": true,
-              "sourceMap": false
+              "sourceMap": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
@@ -38,6 +44,10 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "local": {
+              "optimization": false,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -46,9 +56,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": { "buildTarget": "repositorio-front:build:production" },
-            "development": { "buildTarget": "repositorio-front:build:development" }
+            "development": { "buildTarget": "repositorio-front:build:development" },
+            "local": { "buildTarget": "repositorio-front:build:local" }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "local"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
