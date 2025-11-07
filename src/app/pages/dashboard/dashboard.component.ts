@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { take } from 'rxjs/operators';
 import { AuthService } from '../../core/sevices/auth.service';
+import { environment } from '../../../environments/environment';
 
 interface DashboardInterface {
  alunosAtivos: number,
@@ -30,7 +31,7 @@ export class DashboardComponent implements OnInit {
   }
 
   carregarDashboard() {
-    this.http.get<DashboardInterface>('http://localhost:3000/dashboard')
+    this.http.get<DashboardInterface>(`${environment.apiUrl}/dashboard`)
       .pipe(take(1))
       .subscribe({
         next: (res) => {
