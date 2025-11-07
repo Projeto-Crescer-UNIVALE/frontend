@@ -47,7 +47,6 @@ export const routes: Routes = [
           },
         ]
       },
-
       {
         path: 'alunos',
         children: [
@@ -61,7 +60,24 @@ export const routes: Routes = [
                 loadComponent: () => import('./pages/alunos/alunos-form/alunos-form.component').then(m => m.AlunosFormComponent),
                 pathMatch: 'full'
               },
-              { path: 'diario', loadComponent: () => import('./pages/alunos/alunos-diario/alunos-diario.component').then(m => m.AlunosDiarioComponent) }
+              {
+                path: 'diario',
+                children: [
+                  {
+                    path: '',
+                    loadComponent: () => import('./pages/alunos/alunos-diario/alunos-diario.component').then(m => m.AlunosDiarioComponent),
+                    pathMatch: 'full'
+                  },
+                  {
+                    path: 'novo',
+                    loadComponent: () => import('../app/pages/alunos/diario-form/diario-form.component').then(m => m.DiarioFormComponent)
+                  },
+                  {
+                    path: ':idDiario',
+                    loadComponent: () => import('../app/pages/alunos/diario-form/diario-form.component').then(m => m.DiarioFormComponent)
+                  }
+                ]
+              }
             ]
           },
         ]
