@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TabelaComponent, Coluna } from "../../../components/tabela/tabela.component";
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-list',
@@ -32,7 +33,7 @@ export class ListComponent {
   deletarUsuario(funcionario: any) {
     if (confirm(`Tem certeza que deseja excluir o usuário ${funcionario.nome}?`)) {
       // Atualiza o usuário para inativo ao invés de deletar
-      this.http.put(`http://localhost:3000/funcionario/${funcionario.id_funcionario}`,
+      this.http.put(`${environment.apiUrl}/funcionario/${funcionario.id_funcionario}`,
         { ...funcionario, ativo: false }
       ).subscribe(() => {
         alert('Usuário deletado com sucesso!');

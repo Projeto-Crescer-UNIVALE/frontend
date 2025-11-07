@@ -4,6 +4,7 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DiarioService } from '../../../core/services/diario.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-alunos-diario',
@@ -40,7 +41,7 @@ export class AlunosDiarioComponent implements OnInit {
   }
 
   private carregarAluno(): void {
-    this.http.get(`http://localhost:3000/aluno/${this.idAluno}`).subscribe({
+    this.http.get(`${environment.apiUrl}/aluno/${this.idAluno}`).subscribe({
       next: (data: any) => {
         this.aluno = data;
       },

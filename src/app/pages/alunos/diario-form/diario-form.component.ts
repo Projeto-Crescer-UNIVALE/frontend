@@ -5,6 +5,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { HttpClient } from '@angular/common/http';
 import { DiarioService } from '../../../core/services/diario.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-diario-form',
@@ -87,7 +88,7 @@ export class DiarioFormComponent implements OnInit {
 
   private carregarOficinas(): void {
     // Carrega o aluno para pegar suas oficinas
-    this.http.get(`http://localhost:3000/aluno/${this.idAluno}`).subscribe({
+    this.http.get(`${environment.apiUrl}/aluno/${this.idAluno}`).subscribe({
       next: (response: any) => {
         if (response && response.oficinas && Array.isArray(response.oficinas)) {
           this.oficinasDisponiveis = response.oficinas
@@ -110,7 +111,7 @@ export class DiarioFormComponent implements OnInit {
   }
 
   private carregarAluno(): void {
-    this.http.get(`http://localhost:3000/aluno/${this.idAluno}`).subscribe({
+    this.http.get(`${environment.apiUrl}/aluno/${this.idAluno}`).subscribe({
       next: (data: any) => {
         this.aluno = data;
       },

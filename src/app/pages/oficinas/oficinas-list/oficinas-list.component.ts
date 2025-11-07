@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TabelaComponent, Coluna } from '../../../components/tabela/tabela.component';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-oficinas-list',
@@ -27,7 +28,7 @@ export class OficinasListComponent {
 
   deletarOficina(oficina: any) {
     if (confirm(`Tem certeza que deseja excluir a oficina ${oficina.nome}?`)) {
-      this.http.delete(`http://localhost:3000/oficina/${oficina.id_oficina}`).subscribe(() => {
+      this.http.delete(`${environment.apiUrl}/oficina/${oficina.id_oficina}`).subscribe(() => {
         alert('Oficina deletada com sucesso!');
         // Atualiza a tabela
         const tabela = document.querySelector('app-tabela');

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Coluna, TabelaComponent } from "../../../components/tabela/tabela.component";
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-alunos-list',
@@ -33,7 +34,7 @@ export class AlunosListComponent {
 
   deletarAluno(aluno: any) {
     if (confirm(`Tem certeza que deseja excluir o aluno ${aluno.nome}?`)) {
-      this.http.delete(`http://localhost:3000/aluno/${aluno.id_aluno}`).subscribe(() => {
+      this.http.delete(`${environment.apiUrl}/aluno/${aluno.id_aluno}`).subscribe(() => {
         alert('Aluno deletado com sucesso!');
         window.location.reload();
       });
