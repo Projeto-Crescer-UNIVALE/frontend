@@ -33,8 +33,7 @@ export class ListComponent {
   deletarUsuario(funcionario: any) {
     if (confirm(`Tem certeza que deseja excluir o usuário ${funcionario.nome}?`)) {
       // Atualiza o usuário para inativo ao invés de deletar
-      this.http.put(`${environment.apiUrl}/funcionario/${funcionario.id_funcionario}`,
-        { ...funcionario, ativo: false }
+      this.http.delete(`${environment.apiUrl}/funcionario/${funcionario.id_funcionario}`,
       ).subscribe(() => {
         alert('Usuário deletado com sucesso!');
         // Em vez de recarregar a página, atualiza apenas a tabela

@@ -4,7 +4,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { distinctUntilChanged, take } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { environment } from '../../../environments/environment';
 
 export interface Coluna {
   campo: string;   // chave no objeto de dados (ex.: 'nome', 'cpf', 'email')
@@ -82,17 +81,10 @@ export class TabelaComponent implements OnInit {
   private carregarDados(search: string = '', pagina: number = 1) {
     const url = search ? `${this.endpoint()}?search=${encodeURIComponent(search)}&page=${pagina}` : `${this.endpoint()}?page=${pagina}`;
 
-    this.http.get<ResultadoPaginado>(`${environment.apiUrl}/${url}`).pipe(take(1)).subscribe(response => {
-      // Filtra apenas os registros ativos
-      const dadosFiltrados = response.data.filter((item: any) => item.ativo !== false);
-      this.dados.set(dadosFiltrados);
+    this.http.get<ResultadoPaginado>(`http://localhost:3000/${url}`).pipe(take(1)).subscribe(response => {
+      this.dados.set(response.data);
 
-      // Atualiza a paginação considerando apenas os itens ativos
-      this.paginacao.set({
-        ...response.meta,
-        total: dadosFiltrados.length,
-        lastPage: Math.ceil(dadosFiltrados.length / response.meta.perPage)
-      });
+      this.paginacao.set(response.meta);
     });
   }
 
