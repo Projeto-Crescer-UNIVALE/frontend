@@ -18,6 +18,7 @@ export class LoginComponent {
   private destroyRef = inject(DestroyRef);
   private authService = inject(AuthService);
   readonly loading = signal(false);
+  readonly errorMessage = signal<string | null>(null);
 
   readonly form = new FormGroup({
     email: new FormControl<string>('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
@@ -26,6 +27,9 @@ export class LoginComponent {
 
   submit() {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
+
+    this.loading.set(true);
+    this.errorMessage.set(null);
 
     this.authService.login(this.form.controls.email.value, this.form.controls.password.value)
       .pipe(take(1))
@@ -36,7 +40,12 @@ export class LoginComponent {
             this.router.navigate(['painel/dashboard']);
           }
         },
-        error: (err) => { console.error('Erro no login:', err); }
+        error: (err) => {
+          this.loading.set(false);
+          console.error('Erro no login:', err);
+          const mensagem = err.error?.message || 'E-mail ou senha inválidos';
+          this.errorMessage.set(mensagem);
+        }
       });
   }
 
