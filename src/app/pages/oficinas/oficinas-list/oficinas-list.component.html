@@ -4,6 +4,7 @@
     [colunas]="colunas"
     endpoint="oficina"
     campoIdentificador="id_oficina"
+    (acaoSecundaria)="deletarOficina($event)"
   >
     <button class="btn-primary btn-new" routerLink="novo">
       + Cadastrar nova oficina

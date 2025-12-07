@@ -62,6 +62,16 @@ export class TabelaComponent implements OnInit {
   acaoSecundaria = output<any>(); // deletar
 
   ngOnInit() {
+    // Adiciona listener para recarregar dados
+    const element = document.querySelector('app-tabela');
+    if (element) {
+      element.addEventListener('reloadData', () => {
+        const search = this.activatedRoute.snapshot.queryParams['search'] || '';
+        const pagina = this.activatedRoute.snapshot.queryParams['page'] || 1;
+        this.carregarDados(search, pagina);
+      });
+    }
+
     this.activatedRoute.queryParams.pipe(distinctUntilChanged(), takeUntilDestroyed(this.destroyRef)).subscribe((queryParams) => {
       const search = queryParams['search'] || '';
       const pagina = queryParams['page'] || 1;
@@ -74,7 +84,8 @@ export class TabelaComponent implements OnInit {
 
     this.http.get<ResultadoPaginado>(`${environment.apiUrl}/${url}`).pipe(take(1)).subscribe(response => {
       this.dados.set(response.data);
-      this.paginacao.set(response.meta)
+
+      this.paginacao.set(response.meta);
     });
   }
 

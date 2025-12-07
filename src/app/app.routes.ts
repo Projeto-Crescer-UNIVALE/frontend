@@ -3,6 +3,8 @@ import { AuthLayoutComponent } from './pages/auth/auth-layout/auth-layout.compon
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { NotAuthGuard } from './core/guards/not-auth.guard';
+import { AlunoResolver } from '../app/core/resolvers/aluno.resolver';
+import { OficinaResolver } from './core/resolvers/oficina.resolver';
 
 export const routes: Routes = [
   {
@@ -38,23 +40,44 @@ export const routes: Routes = [
         path: 'oficinas',
         children: [
           { path: '', loadComponent: () => import('./pages/oficinas/oficinas-list/oficinas-list.component').then(m => m.OficinasListComponent) },
-          { path: ':id', loadComponent: () => import('./pages/oficinas/oficina-form/oficina-form.component').then(m => m.OficinaFormComponent) },
+          {
+            path: ':id',
+            loadComponent: () => import('./pages/oficinas/oficina-form/oficina-form.component').then(m => m.OficinaFormComponent),
+            resolve: { dados: OficinaResolver },
+          },
         ]
       },
-
-      { 
+      {
         path: 'alunos',
         children: [
           { path: '', loadComponent: () => import('./pages/alunos/alunos-list/alunos-list.component').then(m => m.AlunosListComponent) },
           {
             path: ':id',
+            resolve: { dados: AlunoResolver },
             children: [
               {
                 path: '',
                 loadComponent: () => import('./pages/alunos/alunos-form/alunos-form.component').then(m => m.AlunosFormComponent),
                 pathMatch: 'full'
               },
-              { path: 'diario', loadComponent: () => import('./pages/alunos/alunos-diario/alunos-diario.component').then(m => m.AlunosDiarioComponent) }
+              {
+                path: 'diario',
+                children: [
+                  {
+                    path: '',
+                    loadComponent: () => import('./pages/alunos/alunos-diario/alunos-diario.component').then(m => m.AlunosDiarioComponent),
+                    pathMatch: 'full'
+                  },
+                  {
+                    path: 'novo',
+                    loadComponent: () => import('../app/pages/alunos/diario-form/diario-form.component').then(m => m.DiarioFormComponent)
+                  },
+                  {
+                    path: ':idDiario',
+                    loadComponent: () => import('../app/pages/alunos/diario-form/diario-form.component').then(m => m.DiarioFormComponent)
+                  }
+                ]
+              }
             ]
           },
         ]

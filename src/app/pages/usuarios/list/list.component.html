@@ -4,6 +4,7 @@
     [colunas]="colunas"
     endpoint="funcionario"
     campoIdentificador="id_funcionario"
+    (acaoSecundaria)="deletarUsuario($event)"
   >
     <button class="btn-primary btn-new" routerLink="novo">
       + Cadastrar novo usuário

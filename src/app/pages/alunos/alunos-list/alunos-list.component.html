@@ -5,6 +5,7 @@
     [colunas]="colunas"
     endpoint="aluno"
     campoIdentificador="id_aluno"
+    (acaoSecundaria)="deletarAluno($event)"
   >
     <button class="btn-primary btn-new" routerLink="novo">+ Adicionar novo aluno</button>
   </app-tabela>

@@ -3,19 +3,21 @@
   <nav class="breadcrumb">
     <a href="#">Alunos</a>
     <span>&gt;</span>
-    <span class="current">{{ id ? 'Editar Aluno' : 'Adicionar novo aluno' }}</span>
+    <span class="current">{{
+      id ? "Editar Aluno" : "Adicionar novo aluno"
+    }}</span>
   </nav>
 
-  <h1>{{ id ? 'Editar Aluno' : 'Adicionar novo Aluno' }}</h1>
+  <h1>{{ id ? "Editar Aluno" : "Adicionar novo Aluno" }}</h1>
 
   <div class="tabs">
     <a class="tab" [routerLink]="[]" routerLinkActive="active">
       Informações cadastrais
     </a>
     @if (id) {
-      <a class="tab" [routerLink]="['diario']" routerLinkActive="active">
-        Diário
-      </a>
+    <a class="tab" [routerLink]="['diario']" routerLinkActive="active">
+      Diário
+    </a>
     }
   </div>
 
@@ -28,11 +30,11 @@
       </div>
       <div class="campo pequeno">
         <label>CPF</label>
-        <input formControlName="cpf" type="text" mask="999.999.999-99"/>
+        <input formControlName="cpf" type="text" mask="999.999.999-99" />
       </div>
       <div class="campo pequeno">
         <label>RG</label>
-        <input formControlName="rg" type="text" mask="9999999-9"/>
+        <input formControlName="rg" type="text" mask="9999999-9" />
       </div>
     </div>
 
@@ -43,14 +45,14 @@
       </div>
       <div class="campo pequeno">
         <label>NIS</label>
-        <input formControlName="nis" type="text" mask="99999999999"/>
+        <input formControlName="nis" type="text" mask="99999999999" />
       </div>
     </div>
 
     <div class="form-grid-4col">
       <div class="campo pequeno">
         <label>CEP</label>
-        <input formControlName="cep" type="text" mask="99999-999"/>
+        <input formControlName="cep" type="text" mask="99999-999" />
       </div>
       <div class="campo">
         <label>Rua</label>
@@ -73,7 +75,7 @@
       </div>
       <div class="campo pequeno">
         <label>Telefone</label>
-        <input formControlName="telefone" type="text" mask="(00) 00000-0000"/>
+        <input formControlName="telefone" type="text" mask="(00) 00000-0000" />
       </div>
     </div>
 
@@ -83,38 +85,55 @@
         <label>Grupo</label>
         <select formControlName="grupo_scfv">
           <option value="">Selecione</option>
-          <option value="0">Criança</option>
-          <option value="1">Adolescente</option>
-          <option value="2">Adulto</option>
+          <option [value]="0">Criança</option>
+          <option [value]="1">Adolescente</option>
+          <option [value]="2">Adulto</option>
         </select>
       </div>
       <div class="campo">
         <label>Oficinas</label>
-        <select>
-          <option value="">Selecione</option>
-          <option value="0">Informática</option>
-          <option value="1">Música</option>
-          <option value="2">Artes</option>
+        <select formControlName="oficinas">
+          <option value="">Selecione uma oficina</option>
+          <option
+            *ngFor="let oficina of oficinasDisponiveis"
+            [value]="oficina.id_oficina"
+          >
+            {{ oficina.nome }}
+          </option>
         </select>
+        <small *ngIf="oficinasDisponiveis.length === 0" style="color: #999">
+          Carregando oficinas...
+        </small>
       </div>
     </div>
 
     <div class="form-grid-duplo">
       <div class="campo">
         <label>Situação Escolar</label>
-        <select>
-          <option value="">Selecione</option>
-          <option value="0">Frequente</option>
-          <option value="1">Não Frequente</option>
+        <select formControlName="situacao_escolar">
+          <option [value]="">Selecione</option>
+          <option [value]="0">Frequente</option>
+          <option [value]="1">Não Frequente</option>
         </select>
       </div>
       <div class="campo">
         <label>Programas Sociais</label>
-        <select>
-          <option value="">Selecione</option>
-          <option value="0">Programa Bolsa Família</option>
-          <option value="1">BPC/LOAS</option>
+        <select formControlName="programaSocial">
+          <option value="">Selecione um programa social</option>
+          <option
+            *ngFor="let programa of programasSociaisDisponiveis"
+            [value]="programa.id_programa_social"
+            [selected]="form.get('programaSocial')?.value == programa.id_programa_social"
+          >
+            {{ programa.nome }}
+          </option>
         </select>
+        <small
+          *ngIf="programasSociaisDisponiveis.length === 0"
+          style="color: #999"
+        >
+          Carregando programas sociais...
+        </small>
       </div>
     </div>
     <h2>Informações médicas</h2>
@@ -134,7 +153,9 @@
     </div>
 
     <div class="botoes">
-      <button type="submit" class="btn btn-primary">{{ id ? 'Salvar Alterações' : 'Adicionar novo aluno' }}</button>
+      <button type="submit" class="btn btn-primary">
+        {{ id ? "Salvar Alterações" : "Adicionar novo aluno" }}
+      </button>
     </div>
   </form>
 </div>

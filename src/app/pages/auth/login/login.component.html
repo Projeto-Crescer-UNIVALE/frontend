@@ -2,6 +2,10 @@
   <h2>Acesso</h2>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
+    <div *ngIf="errorMessage()" class="error-msg" style="margin-bottom: 16px; padding: 12px; background-color: #fdd; border: 1px solid #c62828; border-radius: 4px; color: #c62828;">
+      {{ errorMessage() }}
+    </div>
+
     <label class="label" for="email">E-mail</label>
     <input
       class="input"

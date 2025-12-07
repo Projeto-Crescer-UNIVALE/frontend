@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../core/sevices/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 function matchValidator(a: string, b: string): ValidatorFn {
   return (group: AbstractControl) => {

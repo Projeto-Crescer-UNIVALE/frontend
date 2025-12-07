@@ -1,0 +1,112 @@
+<div class="container-aluno">
+  <nav class="breadcrumb">
+    <a routerLink="/painel/alunos">Alunos</a>
+    <span>&gt;</span>
+    <a [routerLink]="['/painel/alunos', idAluno]">{{ aluno?.nome || "..." }}</a>
+    <span>&gt;</span>
+    <a [routerLink]="['/painel/alunos', idAluno, 'diario']">Diário</a>
+    <span>&gt;</span>
+    <span class="current">{{
+      isEdicao ? "Editar registro" : "Novo registro"
+    }}</span>
+  </nav>
+
+  <h1>
+    {{ isEdicao ? "Editar registro do diário" : "Adicionar novo registro" }}
+  </h1>
+
+  <div *ngIf="carregando" class="carregando">
+    <div class="spinner"></div>
+    <p>Carregando dados...</p>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()" *ngIf="!carregando">
+    <div class="form-section">
+      <h2>Informações do registro</h2>
+
+      <div class="info-box">
+        <div class="info-item">
+          <span class="info-label">Aluno:</span>
+          <span class="info-value">{{ aluno?.nome || "Carregando..." }}</span>
+        </div>
+        <div class="info-item" *ngIf="isEdicao && diario?.autor">
+          <span class="info-label">Autor:</span>
+          <span class="info-value">{{ diario.autor.nome }}</span>
+        </div>
+        <div class="info-item" *ngIf="isEdicao && diario?.criado_em">
+          <span class="info-label">Criado em:</span>
+          <span class="info-value">{{
+            diario.criado_em | date : "dd/MM/yyyy 'às' HH:mm"
+          }}</span>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="id_oficina">Oficina *</label>
+        <select formControlName="id_oficina" id="id_oficina">
+          <option [value]="null">Selecione uma oficina</option>
+          <option
+            *ngFor="let oficina of oficinasDisponiveis"
+            [value]="oficina.id_oficina"
+          >
+            {{ oficina.nome }}
+          </option>
+        </select>
+        <small
+          *ngIf="
+            form.get('id_oficina')?.invalid && form.get('id_oficina')?.touched
+          "
+          class="erro"
+        >
+          Selecione uma oficina
+        </small>
+      </div>
+
+      <div class="campo">
+        <label for="conteudo">Conteúdo do registro *</label>
+        <textarea
+          formControlName="conteudo"
+          id="conteudo"
+          placeholder="Descreva as atividades, comportamento ou observações relevantes sobre o aluno..."
+          rows="8"
+        ></textarea>
+        <div class="campo-footer">
+          <small
+            *ngIf="
+              form.get('conteudo')?.invalid && form.get('conteudo')?.touched
+            "
+            class="erro"
+          >
+            O conteúdo é obrigatório e deve ter no máximo 300 caracteres
+          </small>
+          <small
+            class="caracteres-contador"
+            [class.limite]="caracteresRestantes < 50"
+          >
+            {{ caracteresRestantes }} caracteres restantes
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="botoes">
+      <button
+        type="button"
+        class="btn-deletar"
+        (click)="deletar()"
+        *ngIf="isEdicao"
+      >
+        <span class="material-symbols-outlined">delete</span>
+        Excluir registro
+      </button>
+      <div class="botoes-direita">
+        <button type="button" class="btn-cancelar" (click)="cancelar()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-salvar" [disabled]="form.invalid">
+          {{ isEdicao ? "Salvar alterações" : "Adicionar registro" }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
