@@ -19,7 +19,7 @@ export class FormComponent implements OnInit {
     email: new FormControl('', { validators: [Validators.required, Validators.maxLength(60)], nonNullable: true}),
     telefone: new FormControl('', { validators: [Validators.required, Validators.maxLength(15)], nonNullable: true}),
     ativo: new FormControl(true, { validators: [Validators.required], nonNullable: true}),
-    perfil: new FormControl<'Administrador' | 'Professor'>('Professor', { validators: [Validators.required], nonNullable: true})
+    id_perfil: new FormControl<"1" | "2">("2", { validators: [Validators.required], nonNullable: true})
   })
 
   titulo: string = 'Cadastrar Usuário';
@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
           email: funcionario.email,
           telefone: funcionario.telefone,
           ativo: funcionario.ativo,
-          perfil: funcionario.perfil
+          id_perfil: funcionario.id_perfil.toString() as "1" | "2"
         });
       },
       error: (erro) => {
@@ -67,7 +67,7 @@ export class FormComponent implements OnInit {
         email: formValue.email,
         telefone: formValue.telefone,
         ativo: formValue.ativo,
-        id_perfil: formValue.perfil === 'Administrador' ? 1 : 2
+        id_perfil: Number(formValue.id_perfil)
       };
       const idParam = this.route.snapshot.paramMap.get('id');
 
