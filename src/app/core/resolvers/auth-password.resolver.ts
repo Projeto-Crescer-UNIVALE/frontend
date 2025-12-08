@@ -1,17 +1,18 @@
-import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
-import { RedirectCommand, ResolveFn, Router } from "@angular/router";
+import { ResolveFn, Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { firstValueFrom } from "rxjs";
+import { AuthResponse } from "../interface";
 
-export const authPasswordResolver: ResolveFn<unknown> = async (route) => {
+export const authPasswordResolver: ResolveFn<AuthResponse | null> = async (route) => {
   const token = route.paramMap.get('token');
   const router = inject(Router)
   const authService = inject(AuthService)
   const isCreatePasswordRoute = route.routeConfig?.path === 'create-password/:token';
 
   if (!token) {
-    return router.navigate(['/auth/sign-in'])
+    await router.navigate(['/auth/sign-in'])
+    return null;
   }
 
   const session = await firstValueFrom(authService.verificaToken(token, isCreatePasswordRoute ? 'primeiro_acesso' : 'redefinicao_senha'))
