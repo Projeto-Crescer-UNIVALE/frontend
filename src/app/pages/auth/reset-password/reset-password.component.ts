@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators, ValidatorFn, A
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
+import { AuthResponse } from '../../../core/interface';
 
 function matchValidator(a: string, b: string): ValidatorFn {
   return (group: AbstractControl) => {
@@ -39,11 +40,22 @@ export class ResetPasswordComponent {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
     this.loading.set(true);
 
-    this.auth.alterarSenhaComToken(this.token, this.form.value.password!, this.form.value.confirm!)
+    const accessToken = this.session?.accessToken;
+
+    if(!accessToken) {
+      this.loading.set(false);
+      return;
+    }
+
+    this.auth.alterarSenhaComToken(accessToken, this.form.value.password!, this.form.value.confirm!)
       .subscribe({
         next: () => this.router.navigate(['/auth/login']),
         error: () => this.loading.set(false),
         complete: () => this.loading.set(false)
       });
+  }
+
+  get session() {
+    return this.route.snapshot.data['session'] as AuthResponse | null;
   }
 }

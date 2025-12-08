@@ -47,8 +47,8 @@ export class AuthService {
     return this.http.post<void>(`${this.apiUrl}/recuperar-senha`, { email });
   }
 
-  verificaToken(token: string, tipoToken: any = {}): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/verifica-token`, { token, tipoToken });
+  verificaToken(token: string, tipoToken: any = {}) {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/verifica-token`, { token, tipoToken });
   }
 
   alterarSenhaComToken(token: string, novaSenha: string, confirmarNovaSenha: string): Observable<void> {
