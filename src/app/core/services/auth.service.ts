@@ -64,7 +64,14 @@ export class AuthService {
     const data = localStorage.getItem('pcrescer_data');
     if (!data) { return false };
 
-    const { accessToken, funcionario } = JSON.parse(data) as AuthResponse;
+    const { accessToken, funcionario, expiresAt } = JSON.parse(data) as AuthResponse;
+
+    const now = new Date();
+    const expiryDate = new Date(expiresAt);
+
+    if (now >= expiryDate) {
+      return false;
+    }
 
     return !!accessToken && !!funcionario;
   }
